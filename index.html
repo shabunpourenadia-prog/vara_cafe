@@ -44,8 +44,7 @@ button,input,select{
 
 .hero{
   min-height:640px;
-  background:
-    linear-gradient(135deg,#101b2d,#17263c 65%,#26354a);
+  background:linear-gradient(135deg,#101b2d,#17263c 65%,#26354a);
   color:#fff;
   display:flex;
   align-items:center;
@@ -408,6 +407,35 @@ section{
   font-size:12px;
 }
 
+.manager-box{
+  margin-top:25px;
+  border-top:1px solid #eee;
+  padding-top:25px;
+}
+
+.manager-list{
+  display:grid;
+  gap:10px;
+  margin-top:15px;
+}
+
+.manager-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:14px;
+  border:1px solid #eee;
+  border-radius:12px;
+  background:#fafafa;
+}
+
+.role{
+  font-size:12px;
+  color:var(--g);
+  font-weight:bold;
+}
+
 /* FOOTER */
 
 footer{
@@ -472,6 +500,11 @@ footer{
   .qr-card{
     grid-column:auto;
   }
+
+  .manager-card{
+    flex-direction:column;
+    align-items:stretch;
+  }
 }
 </style>
 </head>
@@ -532,8 +565,6 @@ CAFE
 </header>
 
 
-<!-- MENU -->
-
 <section id="menu">
 
 <div class="wrap">
@@ -553,7 +584,6 @@ OUR MENU
 </p>
 
 </div>
-
 
 <div class="tabs">
 
@@ -579,15 +609,12 @@ OUR MENU
 
 </div>
 
-
 <div class="menu"></div>
 
 </div>
 
 </section>
 
-
-<!-- ABOUT -->
 
 <section id="about" class="about">
 
@@ -612,7 +639,6 @@ ABOUT VARA
 </a>
 
 </div>
-
 
 <div class="facts">
 
@@ -643,8 +669,6 @@ ABOUT VARA
 </section>
 
 
-<!-- CONTACT -->
-
 <section id="contact">
 
 <div class="wrap">
@@ -665,14 +689,11 @@ COME VISIT
 
 </div>
 
-
 <div class="info">
 
 <div class="card">
 
-<div class="icon">
-⌖
-</div>
+<div class="icon">⌖</div>
 
 <h3>
 آدرس
@@ -688,9 +709,7 @@ COME VISIT
 
 <div class="card">
 
-<div class="icon">
-◷
-</div>
+<div class="icon">◷</div>
 
 <h3>
 ساعات کاری
@@ -706,9 +725,7 @@ COME VISIT
 
 <div class="card">
 
-<div class="icon">
-◎
-</div>
+<div class="icon">◎</div>
 
 <h3>
 اینستاگرام
@@ -720,8 +737,6 @@ COME VISIT
 
 </div>
 
-
-<!-- QR -->
 
 <div class="qr-card">
 
@@ -758,9 +773,7 @@ COME VISIT
 Instagram: @varacafe.sari
 </span>
 
-<span>
-•
-</span>
+<span>•</span>
 
 <span>
 ۸ صبح تا ۱۰ شب
@@ -794,11 +807,10 @@ PRIVATE ACCESS
 </h2>
 
 <p>
-ورود فقط برای مدیران مجاز
+فقط مدیران مجاز می‌توانند وارد شوند.
 </p>
 
 </div>
-
 
 <input
 id="adminEmail"
@@ -807,14 +819,12 @@ placeholder="ایمیل مدیریت"
 style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px"
 >
 
-
 <input
 id="adminPassword"
 type="password"
 placeholder="رمز عبور"
 style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-top:10px"
 >
-
 
 <button
 class="primary"
@@ -824,9 +834,8 @@ style="margin-top:12px"
 ورود امن
 </button>
 
-
 <div id="loginMsg" class="admin-note">
-این بخش فقط از مسیر مدیریت قابل دسترسی است.
+ایمیل و رمز حساب مدیریت را وارد کنید.
 </div>
 
 </div>
@@ -841,11 +850,11 @@ MANAGEMENT
 </div>
 
 <h2>
-پنل مدیریت منو
+پنل مدیریت وارا
 </h2>
 
-<p>
-نام، توضیحات، دسته‌بندی و قیمت هر آیتم را تغییر بده.
+<p id="adminWelcome">
+مدیریت منو
 </p>
 
 </div>
@@ -917,12 +926,31 @@ placeholder="توضیحات"
 
 <div id="adminList" class="adminlist"></div>
 
+</div>
 
-<div class="admin-note">
-تغییرات منو در دیتابیس آنلاین ذخیره می‌شوند.
+
+<!-- MANAGERS -->
+
+<div class="adminbox manager-box">
+
+<div class="kicker">
+ADMIN TEAM
+</div>
+
+<h2>
+مدیران وارا
+</h2>
+
+<p class="admin-note">
+مدیران مجاز می‌توانند وارد پنل مدیریت شوند.
+</p>
+
+<div id="managerList" class="manager-list">
+در حال بارگذاری...
 </div>
 
 </div>
+
 
 </div>
 
@@ -934,8 +962,6 @@ placeholder="توضیحات"
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
-/* SUPABASE */
 
 const SUPABASE_URL =
 'https://fhdywhjtyvugxywlgtvb.supabase.co';
@@ -949,10 +975,8 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
-
-/* DATA */
-
 let data=[];
+let currentAdmin=null;
 
 
 /* SAFE HTML */
@@ -963,13 +987,11 @@ return String(value ?? '')
 .replace(/[&<>"']/g,function(char){
 
 return {
-
 '&':'&amp;',
 '<':'&lt;',
 '>':'&gt;',
 '"':'&quot;',
 "'":'&#039;'
-
 }[char];
 
 });
@@ -977,15 +999,13 @@ return {
 }
 
 
-/* RENDER */
+/* RENDER MENU */
 
 function render(){
 
-const menu =
-document.querySelector('.menu');
+const menu=document.querySelector('.menu');
 
-menu.innerHTML =
-data.map(function(x){
+menu.innerHTML=data.map(function(x){
 
 return `
 <div class="item" data-cat="${escapeHtml(x.category)}">
@@ -1012,11 +1032,12 @@ ${escapeHtml(x.price)}
 }).join('');
 
 
-const adminList =
+const adminList=
 document.getElementById('adminList');
 
-adminList.innerHTML =
-data.map(function(x,i){
+if(!adminList) return;
+
+adminList.innerHTML=data.map(function(x,i){
 
 return `
 <div class="adminrow">
@@ -1036,9 +1057,7 @@ value="${escapeHtml(x.description || '')}"
 onchange="edit(${i},'description',this.value)"
 >
 
-<select
-onchange="edit(${i},'category',this.value)"
->
+<select onchange="edit(${i},'category',this.value)">
 
 <option value="coffee" ${x.category==='coffee'?'selected':''}>
 قهوه
@@ -1083,7 +1102,7 @@ await supabaseClient
 
 if(result.error){
 
-document.querySelector('.menu').innerHTML = `
+document.querySelector('.menu').innerHTML=`
 
 <div class="item">
 
@@ -1100,7 +1119,6 @@ ${escapeHtml(result.error.message)}
 </div>
 
 </div>
-
 `;
 
 return;
@@ -1108,8 +1126,7 @@ return;
 }
 
 
-data =
-result.data || [];
+data=result.data || [];
 
 
 if(!data.length){
@@ -1175,18 +1192,16 @@ const rows=[
 ].map(function(x){
 
 return {
-
 name:x[0],
 price:x[1],
 description:x[2],
 category:x[3]
-
 };
 
 });
 
 
-const insert =
+const insert=
 await supabaseClient
 .from('menu_items')
 .insert(rows)
@@ -1195,8 +1210,7 @@ await supabaseClient
 
 if(!insert.error){
 
-data =
-insert.data || [];
+data=insert.data || [];
 
 }
 
@@ -1208,19 +1222,43 @@ render();
 }
 
 
-/* ADMIN LOGIN */
+/* VERIFY ADMIN */
+
+async function verifyAdmin(userId){
+
+const result=
+await supabaseClient
+.from('admin_users')
+.select('id,email,role')
+.eq('user_id',userId)
+.maybeSingle();
+
+
+if(result.error){
+
+console.error(result.error);
+
+return null;
+
+}
+
+
+return result.data;
+
+}
+
+
+/* LOGIN */
 
 async function unlockAdmin(){
 
-const email =
-document
-.getElementById('adminEmail')
+const email=
+document.getElementById('adminEmail')
 .value
 .trim();
 
-const password =
-document
-.getElementById('adminPassword')
+const password=
+document.getElementById('adminPassword')
 .value;
 
 
@@ -1233,46 +1271,59 @@ return;
 }
 
 
-const result =
-await supabaseClient
-.auth
-.signInWithPassword({
-
+const login=
+await supabaseClient.auth.signInWithPassword({
 email:email,
 password:password
-
 });
 
 
-if(result.error){
+if(login.error){
 
-document
-.getElementById('loginMsg')
-.textContent =
-'ورود ناموفق: ' +
-result.error.message;
+document.getElementById('loginMsg').textContent=
+'ورود ناموفق: '+login.error.message;
 
 return;
 
 }
 
 
-document
-.getElementById('loginBox')
+const user=login.data.user;
+
+const admin=
+await verifyAdmin(user.id);
+
+
+if(!admin){
+
+await supabaseClient.auth.signOut();
+
+document.getElementById('loginMsg').textContent=
+'این حساب اجازه ورود به پنل مدیریت وارا را ندارد.';
+
+return;
+
+}
+
+
+currentAdmin=admin;
+
+document.getElementById('loginBox')
 .style.display='none';
 
-
-document
-.getElementById('panel')
+document.getElementById('panel')
 .style.display='block';
 
-
-document
-.getElementById('adminPassword')
+document.getElementById('adminPassword')
 .value='';
 
+document.getElementById('adminWelcome')
+.textContent=
+'خوش آمدید — '+admin.email+' — '+admin.role;
 
 await loadMenu();
+
+await loadManagers();
 
 }
 
@@ -1281,11 +1332,9 @@ await loadMenu();
 
 async function lockAdmin(){
 
-await supabaseClient
-.auth
-.signOut();
+await supabaseClient.auth.signOut();
 
-window.location.href =
+window.location.href=
 window.location.pathname;
 
 }
@@ -1295,7 +1344,7 @@ window.location.pathname;
 
 async function edit(i,field,value){
 
-const result =
+const result=
 await supabaseClient
 .from('menu_items')
 .update({
@@ -1331,7 +1380,7 @@ return;
 }
 
 
-const result =
+const result=
 await supabaseClient
 .from('menu_items')
 .delete()
@@ -1358,27 +1407,20 @@ render();
 
 async function addItem(){
 
-const name =
-document
-.getElementById('newName')
-.value
-.trim();
+const name=
+document.getElementById('newName')
+.value.trim();
 
-const price =
-document
-.getElementById('newPrice')
-.value
-.trim();
+const price=
+document.getElementById('newPrice')
+.value.trim();
 
-const description =
-document
-.getElementById('newDesc')
-.value
-.trim();
+const description=
+document.getElementById('newDesc')
+.value.trim();
 
-const category =
-document
-.getElementById('newCat')
+const category=
+document.getElementById('newCat')
 .value;
 
 
@@ -1391,16 +1433,14 @@ return;
 }
 
 
-const result =
+const result=
 await supabaseClient
 .from('menu_items')
 .insert({
-
 name:name,
 price:price,
 description:description,
 category:category
-
 })
 .select()
 .single();
@@ -1420,15 +1460,10 @@ data.push(result.data);
 render();
 
 
-[
-'newName',
-'newPrice',
-'newDesc'
-].forEach(function(id){
+['newName','newPrice','newDesc']
+.forEach(function(id){
 
-document
-.getElementById(id)
-.value='';
+document.getElementById(id).value='';
 
 });
 
@@ -1448,7 +1483,7 @@ return;
 }
 
 
-const result =
+const result=
 await supabaseClient
 .from('menu_items')
 .delete()
@@ -1471,12 +1506,11 @@ await loadMenu();
 }
 
 
-/* MENU FILTER */
+/* FILTER */
 
 function show(category,button){
 
-document
-.querySelectorAll('.tab')
+document.querySelectorAll('.tab')
 .forEach(function(x){
 
 x.classList.remove('active');
@@ -1487,43 +1521,103 @@ x.classList.remove('active');
 button.classList.add('active');
 
 
-document
-.querySelectorAll('.item')
+document.querySelectorAll('.item')
 .forEach(function(item){
 
-item.style.display =
+item.style.display=
 (
 category==='all' ||
 item.dataset.cat===category
 )
-?
-'flex'
-:
-'none';
+?'flex':'none';
 
 });
 
 }
 
 
-/* QR CODE */
+/* QR */
 
 function createQR(){
 
-const currentURL =
-window.location.href
-.split('#')[0];
+const currentURL=
+window.location.origin+
+window.location.pathname;
 
-
-const qrURL =
-'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='
-+
+const qrURL=
+'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+
 encodeURIComponent(currentURL);
 
+document.getElementById('qrCode').src=qrURL;
 
-document
-.getElementById('qrCode')
-.src=qrURL;
+}
+
+
+/* LOAD MANAGERS */
+
+async function loadManagers(){
+
+const list=
+document.getElementById('managerList');
+
+if(!currentAdmin){
+
+return;
+
+}
+
+
+const result=
+await supabaseClient
+.from('admin_users')
+.select('id,email,role,created_at')
+.order('created_at',{ascending:true});
+
+
+if(result.error){
+
+list.innerHTML=
+'امکان دریافت لیست مدیران وجود ندارد.';
+
+return;
+
+}
+
+
+if(!result.data.length){
+
+list.innerHTML=
+'مدیری ثبت نشده است.';
+
+return;
+
+}
+
+
+list.innerHTML=
+result.data.map(function(manager){
+
+return `
+<div class="manager-card">
+
+<div>
+
+<strong>
+${escapeHtml(manager.email)}
+</strong>
+
+<br>
+
+<span class="role">
+${manager.role === 'owner' ? 'مدیر اصلی' : 'مدیر'}
+</span>
+
+</div>
+
+</div>
+`;
+
+}).join('');
 
 }
 
@@ -1532,30 +1626,22 @@ document
 
 function checkAdminRoute(){
 
-const params =
+const params=
 new URLSearchParams(
 window.location.search
 );
 
-const admin =
-params.get('admin');
+if(params.get('admin')==='1'){
 
-
-if(admin === '1'){
-
-document
-.getElementById('customerSite')
+document.getElementById('customerSite')
 .style.display='none';
 
-
-document
-.getElementById('admin')
+document.getElementById('admin')
 .style.display='block';
 
 return true;
 
 }
-
 
 return false;
 
@@ -1564,7 +1650,7 @@ return false;
 
 /* START */
 
-const adminMode =
+const adminMode=
 checkAdminRoute();
 
 
