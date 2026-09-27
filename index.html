@@ -2145,13 +2145,16 @@ function markChanged(){
 /* =====================================================
    LOAD CATEGORIES
 ===================================================== */
-
 async function loadCategories(){
 
   const result =
     await supabaseClient
       .from('menu_categories')
       .select('*')
+      .order('sort_order',{
+        ascending:true,
+        nullsFirst:false
+      })
       .order('created_at',{
         ascending:true
       });
@@ -2239,7 +2242,6 @@ function renderTabs(){
 /* =====================================================
    RENDER CATEGORY PANEL
 ===================================================== */
-
 function renderCategories(){
 
   const list =
@@ -2268,6 +2270,13 @@ function renderCategories(){
   list.innerHTML =
     categories.map(function(category,index){
 
+      const isFirst =
+        index === 0;
+
+      const isLast =
+        index === categories.length - 1;
+
+
       return `
 
         <div class="category-row">
@@ -2277,7 +2286,28 @@ function renderCategories(){
             value="${escapeHtml(category.name)}"
           >
 
+
           <div class="category-actions">
+
+            <button
+              class="small-btn"
+              onclick="moveCategoryUp(${index})"
+              ${isFirst ? 'disabled' : ''}
+              title="انتقال به بالا"
+            >
+              ⬆️
+            </button>
+
+
+            <button
+              class="small-btn"
+              onclick="moveCategoryDown(${index})"
+              ${isLast ? 'disabled' : ''}
+              title="انتقال به پایین"
+            >
+              ⬇️
+            </button>
+
 
             <button
               class="primary small-btn"
@@ -2285,6 +2315,7 @@ function renderCategories(){
             >
               ✏️ تغییر نام
             </button>
+
 
             <button
               class="delete-btn small-btn"
@@ -2508,7 +2539,69 @@ function render(){
 
 }
 
+function moveCategoryUp(index){
 
+  if(index <= 0){
+    return;
+  }
+
+
+  const temp =
+    categories[index - 1];
+
+  categories[index - 1] =
+    categories[index];
+
+  categories[index] =
+    temp;
+
+
+  categories.forEach(function(category,i){
+
+    category.sort_order =
+      i + 1;
+
+  });
+
+
+  markChanged();
+
+  render();
+
+}
+  function moveCategoryDown(index){
+
+  if(
+    index < 0 ||
+    index >= categories.length - 1
+  ){
+    return;
+  }
+
+
+  const temp =
+    categories[index + 1];
+
+  categories[index + 1] =
+    categories[index];
+
+  categories[index] =
+    temp;
+
+
+  categories.forEach(function(category,i){
+
+    category.sort_order =
+      i + 1;
+
+  });
+
+
+  markChanged();
+
+  render();
+
+}
 /* =====================================================
    LOAD MENU
 ===================================================== */
