@@ -7,7 +7,12 @@
 
 <meta
   name="viewport"
-  content="width=device-width,initial-scale=1"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
+<meta
+  name="theme-color"
+  content="#101b2d"
 >
 
 <title>VARA CAFE | منوی کافه وارا</title>
@@ -15,13 +20,20 @@
 <style>
 
 :root{
-  --n:#101b2d;
-  --c:#f5efe3;
-  --g:#b8945b;
-  --i:#172033;
-  --m:#7b7f86;
+  --navy:#101b2d;
+  --navy2:#17263c;
+  --navy3:#24344b;
+  --cream:#f5efe3;
+  --cream2:#eee5d6;
+  --gold:#b8945b;
+  --gold2:#d5b477;
+  --ink:#172033;
+  --muted:#7b7f86;
+  --white:#fff;
+  --line:#e8dfd1;
   --danger:#b94a48;
   --success:#35623a;
+  --shadow:0 14px 40px rgba(16,27,45,.08);
 }
 
 *{
@@ -34,9 +46,20 @@ html{
 
 body{
   margin:0;
-  font-family:Tahoma,Arial,sans-serif;
-  background:var(--c);
-  color:var(--i);
+  font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+
+body,
+button,
+input,
+select{
+  -webkit-tap-highlight-color:transparent;
 }
 
 a{
@@ -55,40 +78,64 @@ button{
 }
 
 .wrap{
-  max-width:1120px;
+  width:min(1120px,100%);
   margin:auto;
-  padding:0 22px;
+  padding-left:22px;
+  padding-right:22px;
 }
 
-/* =========================
+
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
-  min-height:640px;
-  background:
-    linear-gradient(
-      135deg,
-      #101b2d,
-      #17263c 65%,
-      #26354a
-    );
-  color:#fff;
-  display:flex;
-  align-items:center;
+  min-height:680px;
   position:relative;
   overflow:hidden;
+  display:flex;
+  align-items:center;
+  color:#fff;
+
+  background:
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(184,148,91,.16),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(184,148,91,.08),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #0d1728 0%,
+      #101b2d 48%,
+      #1c2b42 100%
+    );
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  border:1px solid rgba(213,180,119,.16);
+  border-radius:50%;
+  left:-230px;
+  bottom:-260px;
 }
 
 .hero:after{
   content:"";
   position:absolute;
-  width:420px;
-  height:420px;
-  border:1px solid rgba(184,148,91,.35);
+  width:620px;
+  height:620px;
+  border:1px solid rgba(213,180,119,.08);
   border-radius:50%;
-  left:-130px;
-  top:-120px;
+  right:-360px;
+  top:-330px;
 }
 
 .nav{
@@ -96,17 +143,19 @@ button{
   top:0;
   left:0;
   right:0;
-  padding:24px 0;
-  z-index:5;
+  z-index:10;
+  padding:22px 0;
 }
 
 .navin{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:20px;
 }
 
 .wordmark{
+  min-height:55px;
   display:flex;
   align-items:center;
 }
@@ -114,6 +163,7 @@ button{
 .vara-logo{
   display:block;
   width:150px;
+  max-width:42vw;
   height:auto;
   max-height:70px;
   object-fit:contain;
@@ -121,169 +171,320 @@ button{
 
 .links{
   display:flex;
-  gap:26px;
-  font-size:14px;
+  align-items:center;
+  gap:28px;
+  font-size:13px;
   color:#d9dde4;
+}
+
+.links a{
+  position:relative;
+  transition:.25s ease;
+}
+
+.links a:after{
+  content:"";
+  position:absolute;
+  right:0;
+  bottom:-8px;
+  width:0;
+  height:1px;
+  background:var(--gold2);
+  transition:.25s ease;
+}
+
+.links a:hover{
+  color:#fff;
+}
+
+.links a:hover:after{
+  width:100%;
 }
 
 .hero-content{
   position:relative;
-  z-index:1;
-  max-width:680px;
-  padding:100px 0 60px;
-}
-
-.eyebrow,
-.kicker{
-  color:#d3ae73;
-  letter-spacing:3px;
-  font-size:12px;
+  z-index:2;
+  max-width:700px;
+  padding:120px 0 70px;
 }
 
 .eyebrow{
-  font-size:13px;
-  margin-bottom:18px;
-  letter-spacing:4px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:var(--gold2);
+  font-size:11px;
+  letter-spacing:3px;
+  margin-bottom:22px;
+}
+
+.eyebrow:before{
+  content:"";
+  width:34px;
+  height:1px;
+  background:var(--gold);
 }
 
 h1{
-  font-size:clamp(48px,8vw,88px);
-  line-height:.95;
-  margin:0 0 22px;
-  letter-spacing:8px;
+  font-size:clamp(54px,8vw,92px);
+  line-height:.92;
+  margin:0 0 28px;
+  letter-spacing:7px;
+  font-weight:800;
 }
 
 .hero p{
-  font-size:18px;
-  line-height:2;
-  color:#dfe3e8;
+  margin:0;
   max-width:570px;
+  color:#dce1e8;
+  font-size:17px;
+  line-height:2.15;
+}
+
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px;
 }
 
 .btn{
-  display:inline-block;
-  background:var(--g);
-  color:#fff;
-  padding:14px 25px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:13px 24px;
   border-radius:999px;
-  margin-top:15px;
+  background:var(--gold);
+  color:#fff;
+  border:1px solid var(--gold);
+  font-size:14px;
   font-weight:700;
-  border:0;
-  cursor:pointer;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(184,148,91,.22);
+  background:#c29f65;
 }
 
 .btn.alt{
   background:transparent;
-  border:1px solid #697589;
-  margin-right:10px;
+  border-color:rgba(255,255,255,.25);
+  color:#fff;
 }
 
-/* =========================
+.btn.alt:hover{
+  background:rgba(255,255,255,.06);
+}
+
+
+/* =====================================================
    GENERAL
-========================= */
+===================================================== */
 
 section{
-  padding:78px 0;
+  padding:90px 0;
 }
 
 .section-head{
   text-align:center;
-  margin-bottom:36px;
+  max-width:700px;
+  margin:0 auto 42px;
+}
+
+.kicker{
+  color:var(--gold);
+  letter-spacing:3px;
+  font-size:11px;
+  font-weight:700;
 }
 
 .section-head h2{
+  margin:12px 0 12px;
   font-size:34px;
-  margin:10px 0;
+  color:var(--ink);
 }
 
 .section-head p{
-  color:var(--m);
+  margin:0;
+  color:var(--muted);
+  line-height:1.9;
 }
 
-/* =========================
+
+/* =====================================================
    MENU
-========================= */
+===================================================== */
+
+#menu{
+  background:
+    linear-gradient(
+      180deg,
+      #f5efe3 0%,
+      #faf7f1 100%
+    );
+}
 
 .tabs{
   display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:30px;
+  gap:9px;
+  justify-content:flex-start;
+  overflow-x:auto;
+  padding:5px 2px 14px;
+  margin-bottom:25px;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+
+.tabs::-webkit-scrollbar{
+  display:none;
 }
 
 .tab{
-  border:1px solid #d7cdbd;
-  padding:10px 18px;
+  flex:0 0 auto;
+  border:1px solid var(--line);
+  padding:11px 19px;
+  min-height:43px;
   border-radius:999px;
-  background:#fff;
-  cursor:pointer;
+  background:rgba(255,255,255,.75);
+  color:var(--ink);
+  font-size:13px;
+  transition:.2s ease;
+}
+
+.tab:hover{
+  border-color:var(--gold);
 }
 
 .tab.active{
-  background:var(--n);
+  background:var(--navy);
   color:#fff;
-  border-color:var(--n);
+  border-color:var(--navy);
+  box-shadow:0 7px 18px rgba(16,27,45,.15);
 }
 
 .menu{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
 }
 
 .item{
-  background:#fff;
-  border-radius:18px;
-  padding:22px;
+  position:relative;
+  min-height:115px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(232,223,209,.9);
+  border-radius:20px;
+  padding:23px;
   display:flex;
   justify-content:space-between;
-  gap:20px;
-  box-shadow:0 8px 30px rgba(30,35,45,.06);
+  align-items:flex-start;
+  gap:18px;
+  box-shadow:var(--shadow);
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease;
+}
+
+.item:before{
+  content:"";
+  position:absolute;
+  right:0;
+  top:22px;
+  width:3px;
+  height:35px;
+  border-radius:3px 0 0 3px;
+  background:var(--gold);
+  opacity:.75;
+}
+
+.item:hover{
+  transform:translateY(-3px);
+  border-color:#dfcfb6;
+  box-shadow:0 18px 45px rgba(16,27,45,.11);
 }
 
 .item h3{
-  margin:0 0 8px;
+  margin:0 0 9px;
   font-size:18px;
+  line-height:1.5;
 }
 
 .item p{
   margin:0;
-  color:var(--m);
+  color:var(--muted);
   font-size:13px;
-  line-height:1.8;
+  line-height:1.9;
 }
 
 .price{
+  flex:0 0 auto;
   white-space:nowrap;
-  color:var(--g);
+  color:var(--gold);
   font-weight:800;
+  font-size:14px;
+  background:#fbf7ef;
+  border:1px solid #eee3d2;
+  padding:8px 10px;
+  border-radius:10px;
 }
 
-/* =========================
+.loading,
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  padding:35px;
+  background:#fff;
+  border-radius:20px;
+  color:var(--muted);
+  border:1px solid var(--line);
+}
+
+
+/* =====================================================
    ABOUT
-========================= */
+===================================================== */
 
 .about{
-  background:var(--n);
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(184,148,91,.10),
+      transparent 25%
+    ),
+    var(--navy);
   color:#fff;
 }
 
 .aboutgrid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:55px;
+  gap:70px;
   align-items:center;
 }
 
 .about h2{
-  font-size:38px;
-  margin:10px 0 20px;
+  font-size:39px;
+  margin:12px 0 20px;
 }
 
 .about p{
   color:#d5dae2;
-  line-height:2;
+  line-height:2.2;
+  margin:0;
+  max-width:540px;
+}
+
+.about .btn{
+  margin-top:26px;
 }
 
 .facts{
@@ -293,87 +494,159 @@ section{
 }
 
 .fact{
-  border:1px solid #334156;
-  border-radius:18px;
+  min-height:135px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.035);
+  border-radius:20px;
   padding:25px;
+  color:#d9dee5;
+  line-height:1.8;
 }
 
 .fact b{
   display:block;
-  font-size:22px;
-  color:#d4ad70;
+  font-size:19px;
+  color:var(--gold2);
   margin-bottom:7px;
 }
 
-/* =========================
+
+/* =====================================================
    CONTACT
-========================= */
+===================================================== */
+
+#contact{
+  background:#faf7f1;
+}
 
 .info{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
 }
 
 .card{
   background:#fff;
-  border-radius:18px;
-  padding:26px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:29px 22px;
   text-align:center;
+  box-shadow:var(--shadow);
+  transition:.2s ease;
+}
+
+.card:hover{
+  transform:translateY(-3px);
 }
 
 .icon{
-  font-size:28px;
+  width:52px;
+  height:52px;
+  margin:0 auto 13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#fbf6ed;
+  color:var(--gold);
+  font-size:25px;
 }
 
 .card h3{
-  margin:12px 0 7px;
+  margin:8px 0 9px;
+  font-size:17px;
 }
 
 .card p{
   margin:0;
-  color:var(--m);
-  line-height:1.8;
+  color:var(--muted);
+  line-height:2;
+  font-size:13px;
 }
-
-/* =========================
-   QR
-========================= */
 
 .qr-card{
   grid-column:1/-1;
-  background:#fff;
-  border-radius:18px;
-  padding:30px;
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #faf5eb
+    );
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:38px 20px;
   text-align:center;
+  box-shadow:var(--shadow);
 }
 
 .qr-card h3{
-  margin-top:0;
+  margin:0 0 22px;
+  font-size:20px;
+}
+
+.qr-frame{
+  display:inline-flex;
+  padding:12px;
+  background:#fff;
+  border:1px solid #e4d9c8;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(16,27,45,.08);
 }
 
 .qr-card img{
-  width:200px;
-  height:200px;
-  padding:8px;
-  background:#fff;
-  border-radius:12px;
+  display:block;
+  width:190px;
+  height:190px;
+  border-radius:8px;
 }
 
 .qr-card p{
-  color:var(--m);
-  margin-bottom:0;
+  color:var(--muted);
+  margin:18px 0 0;
+  font-size:12px;
 }
 
-/* =========================
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+  background:#0a1220;
+  color:#aeb7c3;
+  padding:34px 0;
+}
+
+.foot{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:center;
+  font-size:12px;
+}
+
+.social{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+
+/* =====================================================
    ADMIN
-========================= */
+===================================================== */
 
 .admin{
   display:none;
-  background:#eee7da;
   min-height:100vh;
-  padding:40px 0 70px;
+  background:
+    linear-gradient(
+      180deg,
+      #f0e9dd,
+      #f8f4ec
+    );
+  padding:35px 0 70px;
 }
 
 .admin-header{
@@ -384,19 +657,20 @@ section{
   font-size:32px;
   letter-spacing:0;
   margin:0 0 8px;
-  color:var(--n);
+  color:var(--navy);
 }
 
 .admin-header p{
-  color:var(--m);
+  color:var(--muted);
   margin:0;
 }
 
 .adminbox{
   background:#fff;
-  border-radius:20px;
-  padding:24px;
-  box-shadow:0 8px 30px rgba(30,35,45,.06);
+  border:1px solid #e7dfd2;
+  border-radius:22px;
+  padding:25px;
+  box-shadow:0 12px 35px rgba(30,35,45,.06);
   margin-bottom:20px;
 }
 
@@ -407,16 +681,18 @@ section{
 
 .login-title{
   text-align:center;
-  margin-bottom:22px;
+  margin-bottom:25px;
 }
 
 .login-title h2{
-  margin:8px 0;
+  margin:9px 0;
+  color:var(--navy);
 }
 
 .login-title p{
-  color:var(--m);
+  color:var(--muted);
   font-size:13px;
+  line-height:1.8;
 }
 
 .login-form{
@@ -427,46 +703,50 @@ section{
 .admin input,
 .admin select{
   width:100%;
-  padding:12px 13px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  font-family:inherit;
+  padding:13px 14px;
+  border:1px solid #ded7cc;
+  border-radius:12px;
   background:#fff;
   outline:none;
+  font-size:13px;
+  transition:.2s ease;
 }
 
 .admin input:focus,
 .admin select:focus{
-  border-color:var(--g);
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(184,148,91,.10);
 }
 
 .admin button{
   border:0;
-  border-radius:10px;
+  border-radius:12px;
   padding:12px 16px;
   cursor:pointer;
   font-family:inherit;
+  font-weight:600;
 }
 
 .primary{
-  background:var(--g);
+  background:var(--gold);
   color:#fff;
 }
 
 .reset{
   background:#fff;
-  border:1px solid #aaa!important;
+  color:var(--ink);
+  border:1px solid #cfc6b9!important;
 }
 
 .logout{
-  background:#101b2d!important;
+  background:var(--navy)!important;
   color:#fff!important;
 }
 
 .back-site{
   background:#fff!important;
-  color:var(--n)!important;
-  border:1px solid #ddd!important;
+  color:var(--navy)!important;
+  border:1px solid #ddd5c8!important;
 }
 
 .change-buttons{
@@ -477,7 +757,7 @@ section{
 }
 
 .apply-btn{
-  background:#35623a!important;
+  background:var(--success)!important;
   color:#fff!important;
 }
 
@@ -490,12 +770,12 @@ section{
 .status{
   display:block;
   margin-top:14px;
-  padding:10px 13px;
-  border-radius:10px;
+  padding:11px 13px;
+  border-radius:11px;
   background:#eef4ea;
   color:var(--success);
   font-size:12px;
-  line-height:1.7;
+  line-height:1.8;
 }
 
 .error-status{
@@ -505,16 +785,16 @@ section{
 
 .admin-note{
   font-size:12px;
-  color:var(--m);
+  color:var(--muted);
   margin-top:12px;
-  line-height:1.8;
+  line-height:1.9;
 }
 
 .formgrid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:10px;
-  margin-top:14px;
+  margin-top:15px;
 }
 
 .adminlist{
@@ -533,10 +813,10 @@ section{
     70px;
   gap:10px;
   align-items:center;
-  padding:12px;
-  border:1px solid #eee;
-  border-radius:14px;
-  background:#fafafa;
+  padding:13px;
+  border:1px solid #eee8df;
+  border-radius:15px;
+  background:#fcfaf7;
 }
 
 .adminrow button{
@@ -547,10 +827,11 @@ section{
 .admin-section-title{
   margin:0 0 8px;
   font-size:21px;
+  color:var(--navy);
 }
 
 .admin-welcome{
-  color:var(--m);
+  color:var(--muted);
   font-size:13px;
 }
 
@@ -566,9 +847,9 @@ section{
   gap:10px;
   align-items:center;
   padding:12px;
-  border:1px solid #eee;
-  border-radius:14px;
-  background:#fafafa;
+  border:1px solid #eee8df;
+  border-radius:15px;
+  background:#fcfaf7;
 }
 
 .category-actions{
@@ -602,15 +883,15 @@ section{
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  padding:14px;
-  border:1px solid #eee;
-  border-radius:12px;
-  background:#fafafa;
+  padding:15px;
+  border:1px solid #eee8df;
+  border-radius:14px;
+  background:#fcfaf7;
 }
 
 .role{
   font-size:12px;
-  color:var(--g);
+  color:var(--gold);
   font-weight:bold;
 }
 
@@ -622,54 +903,29 @@ section{
   flex-wrap:wrap;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-  background:#0b1320;
-  color:#b9c0ca;
-  padding:35px 0;
-}
-
-.foot{
+.admin-top-actions > div:last-child{
   display:flex;
-  justify-content:space-between;
-  gap:20px;
-  align-items:center;
+  gap:8px;
 }
 
-.social{
-  display:flex;
-  gap:15px;
-}
 
-/* =========================
-   LOADING
-========================= */
-
-.loading{
-  text-align:center;
-  padding:30px;
-  color:var(--m);
-}
-
-.empty{
-  text-align:center;
-  padding:30px;
-  background:#fff;
-  border-radius:18px;
-  color:var(--m);
-}
-
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:720px){
 
   .wrap{
-    padding:0 16px;
+    padding-left:15px;
+    padding-right:15px;
+  }
+
+  .nav{
+    padding:16px 0;
+  }
+
+  .vara-logo{
+    width:125px;
   }
 
   .links{
@@ -677,39 +933,136 @@ footer{
   }
 
   .hero{
-    min-height:610px;
-  }
-
-  .menu,
-  .aboutgrid,
-  .info,
-  .formgrid{
-    grid-template-columns:1fr;
+    min-height:650px;
   }
 
   .hero-content{
-    padding-top:120px;
+    padding-top:125px;
+    padding-bottom:55px;
+  }
+
+  .eyebrow{
+    font-size:9px;
+    letter-spacing:2px;
   }
 
   h1{
     font-size:58px;
+    letter-spacing:5px;
+    margin-bottom:23px;
   }
 
-  .btn.alt{
-    margin-right:0;
+  .hero p{
+    font-size:15px;
+    line-height:2;
+  }
+
+  .hero-buttons{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+    max-width:320px;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  section{
+    padding:65px 0;
+  }
+
+  .section-head{
+    margin-bottom:30px;
+  }
+
+  .section-head h2{
+    font-size:29px;
+  }
+
+  .tabs{
+    justify-content:flex-start;
+    margin-right:-2px;
+    margin-left:-2px;
+  }
+
+  .menu{
+    grid-template-columns:1fr;
+    gap:13px;
+  }
+
+  .item{
+    min-height:105px;
+    padding:19px 17px;
+    border-radius:17px;
+    gap:12px;
+  }
+
+  .item h3{
+    font-size:16px;
+  }
+
+  .item p{
+    font-size:12px;
+    line-height:1.8;
+  }
+
+  .price{
+    font-size:12px;
+    padding:7px 8px;
+  }
+
+  .aboutgrid{
+    grid-template-columns:1fr;
+    gap:35px;
+  }
+
+  .about h2{
+    font-size:32px;
   }
 
   .facts{
-    margin-top:10px;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .fact{
+    min-height:120px;
+    padding:18px 15px;
+    font-size:12px;
+  }
+
+  .fact b{
+    font-size:16px;
+  }
+
+  .info{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .card{
+    padding:24px 18px;
+  }
+
+  .qr-card{
+    grid-column:auto;
+    padding:30px 15px;
+  }
+
+  .qr-card img{
+    width:175px;
+    height:175px;
   }
 
   .foot{
     flex-direction:column;
     text-align:center;
+    line-height:1.9;
   }
 
-  .qr-card{
-    grid-column:auto;
+  .social{
+    justify-content:center;
   }
 
   .admin{
@@ -718,15 +1071,38 @@ footer{
 
   .adminbox{
     padding:18px;
+    border-radius:18px;
   }
 
-  .admin-header h1{
-    font-size:27px;
+  .admin-section-title{
+    font-size:19px;
+  }
+
+  .admin-top-actions{
+    align-items:stretch;
+  }
+
+  .admin-top-actions > div:last-child{
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .admin-top-actions > div:last-child button{
+    width:100%;
+  }
+
+  .formgrid{
+    grid-template-columns:1fr;
   }
 
   .adminrow{
     grid-template-columns:1fr;
     padding:14px;
+  }
+
+  .adminrow button{
+    width:100%;
   }
 
   .category-row{
@@ -747,14 +1123,6 @@ footer{
     align-items:stretch;
   }
 
-  .admin-top-actions{
-    align-items:stretch;
-  }
-
-  .admin-top-actions button{
-    width:100%;
-  }
-
   .change-buttons{
     display:grid;
     grid-template-columns:1fr;
@@ -762,6 +1130,59 @@ footer{
 
   .change-buttons button{
     width:100%;
+  }
+
+  .login-box{
+    margin:25px auto;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media(max-width:380px){
+
+  h1{
+    font-size:51px;
+  }
+
+  .facts{
+    grid-template-columns:1fr;
+  }
+
+  .item{
+    flex-direction:column;
+  }
+
+  .price{
+    align-self:flex-start;
+  }
+
+  .admin-top-actions > div:last-child{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCE MOTION
+===================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+
+  *,
+  *:before,
+  *:after{
+    animation:none!important;
+    transition:none!important;
   }
 
 }
@@ -796,7 +1217,7 @@ alt="VARA CAFE"
 class="vara-logo"
 onerror="
 this.style.display='none';
-this.parentElement.innerHTML='<span>VARA CAFE</span>';
+this.parentElement.innerHTML='<span style=&quot;font-weight:800;letter-spacing:2px;&quot;>VARA CAFE</span>';
 "
 >
 
@@ -845,6 +1266,8 @@ CAFE
 </p>
 
 
+<div class="hero-buttons">
+
 <a
 class="btn"
 href="#menu"
@@ -860,6 +1283,8 @@ href="#contact"
 اطلاعات کافه
 </a>
 
+</div>
+
 
 </div>
 
@@ -869,7 +1294,9 @@ href="#contact"
 
 
 
-<!-- MENU -->
+<!-- =====================================================
+     MENU
+===================================================== -->
 
 <section id="menu">
 
@@ -892,8 +1319,6 @@ OUR MENU
 
 </div>
 
-
-<!-- مهم: id اضافه شده -->
 
 <div
 class="tabs"
@@ -925,7 +1350,9 @@ onclick="show('all',this)"
 
 
 
-<!-- ABOUT -->
+<!-- =====================================================
+     ABOUT
+===================================================== -->
 
 <section
 id="about"
@@ -1014,7 +1441,9 @@ href="#contact"
 
 
 
-<!-- CONTACT -->
+<!-- =====================================================
+     CONTACT
+===================================================== -->
 
 <section id="contact">
 
@@ -1100,10 +1529,14 @@ COME VISIT
 منوی دیجیتال وارا
 </h3>
 
+<div class="qr-frame">
+
 <img
 id="qrCode"
 alt="QR Code"
 >
+
+</div>
 
 <p>
 دوربین موبایل را روی این کد بگیرید تا منوی وارا باز شود.
@@ -1119,6 +1552,10 @@ alt="QR Code"
 </section>
 
 
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
@@ -1510,7 +1947,6 @@ class="manager-list"
 
 <script>
 
-
 /* =====================================================
    SUPABASE CONFIG
 ===================================================== */
@@ -1527,7 +1963,6 @@ window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
-
 
 
 /* =====================================================
@@ -1547,7 +1982,6 @@ let currentAdmin = null;
 let hasChanges = false;
 
 let categoriesAvailable = true;
-
 
 
 /* =====================================================
@@ -1570,7 +2004,6 @@ function escapeHtml(value){
     });
 
 }
-
 
 
 /* =====================================================
@@ -1600,7 +2033,6 @@ const defaultCategories = [
   }
 
 ];
-
 
 
 /* =====================================================
@@ -1668,7 +2100,6 @@ const sampleMenu = [
 ];
 
 
-
 /* =====================================================
    SLUG
 ===================================================== */
@@ -1686,7 +2117,6 @@ function makeSlug(name){
   return slug || ('category-' + Date.now());
 
 }
-
 
 
 /* =====================================================
@@ -1710,7 +2140,6 @@ function markChanged(){
   }
 
 }
-
 
 
 /* =====================================================
@@ -1756,9 +2185,7 @@ async function loadCategories(){
           JSON.stringify(defaultCategories)
         );
 
-
 }
-
 
 
 /* =====================================================
@@ -1807,7 +2234,6 @@ function renderTabs(){
   tabs.innerHTML = html;
 
 }
-
 
 
 /* =====================================================
@@ -1876,7 +2302,6 @@ function renderCategories(){
     }).join('');
 
 }
-
 
 
 /* =====================================================
@@ -2084,7 +2509,6 @@ function render(){
 }
 
 
-
 /* =====================================================
    LOAD MENU
 ===================================================== */
@@ -2147,11 +2571,6 @@ async function loadMenu(){
       result.data || [];
 
 
-    /*
-      اگر منو خالی بود، نمونه‌ها
-      فقط یک بار وارد دیتابیس می‌شوند.
-    */
-
     if(!data.length){
 
       const inserted =
@@ -2180,7 +2599,6 @@ async function loadMenu(){
   }
 
 }
-
 
 
 /* =====================================================
@@ -2217,7 +2635,6 @@ async function verifyAdmin(userId){
   return result.data;
 
 }
-
 
 
 /* =====================================================
@@ -2287,7 +2704,6 @@ async function showAdminPanel(admin){
   await loadManagers();
 
 }
-
 
 
 /* =====================================================
@@ -2408,7 +2824,6 @@ async function unlockAdmin(){
 }
 
 
-
 /* =====================================================
    FORCE PASSWORD
 ===================================================== */
@@ -2426,7 +2841,6 @@ async function forceFreshAdminLogin(){
   }
 
 }
-
 
 
 /* =====================================================
@@ -2465,7 +2879,6 @@ async function lockAdmin(){
 }
 
 
-
 /* =====================================================
    GO SITE
 ===================================================== */
@@ -2476,7 +2889,6 @@ function goToSite(){
     window.location.pathname;
 
 }
-
 
 
 /* =====================================================
@@ -2501,7 +2913,6 @@ function editLocal(
   markChanged();
 
 }
-
 
 
 /* =====================================================
@@ -2537,7 +2948,6 @@ function deleteLocal(index){
   render();
 
 }
-
 
 
 /* =====================================================
@@ -2629,7 +3039,6 @@ function addItem(){
 }
 
 
-
 /* =====================================================
    ADD CATEGORY
 ===================================================== */
@@ -2708,7 +3117,6 @@ function addCategory(){
 }
 
 
-
 /* =====================================================
    RENAME CATEGORY
 ===================================================== */
@@ -2761,7 +3169,6 @@ function renameCategory(index){
   render();
 
 }
-
 
 
 /* =====================================================
@@ -2832,7 +3239,6 @@ function deleteCategory(index){
 }
 
 
-
 /* =====================================================
    APPLY CHANGES
 ===================================================== */
@@ -2875,9 +3281,7 @@ async function applyChanges(){
   try{
 
 
-    /* -----------------------------------------
-       CATEGORY CHECK
-    ----------------------------------------- */
+    /* CATEGORY CHECK */
 
     if(
       !categoriesAvailable &&
@@ -2894,10 +3298,7 @@ async function applyChanges(){
     }
 
 
-
-    /* -----------------------------------------
-       NEW CATEGORIES
-    ----------------------------------------- */
+    /* NEW CATEGORIES */
 
     for(
       const category
@@ -2940,10 +3341,7 @@ async function applyChanges(){
     }
 
 
-
-    /* -----------------------------------------
-       UPDATE / DELETE CATEGORIES
-    ----------------------------------------- */
+    /* UPDATE / DELETE CATEGORIES */
 
     for(
       const oldCategory
@@ -3007,10 +3405,7 @@ async function applyChanges(){
     }
 
 
-
-    /* -----------------------------------------
-       NEW + UPDATED ITEMS
-    ----------------------------------------- */
+    /* NEW + UPDATED ITEMS */
 
     for(
       const item
@@ -3121,10 +3516,7 @@ async function applyChanges(){
     }
 
 
-
-    /* -----------------------------------------
-       DELETED ITEMS
-    ----------------------------------------- */
+    /* DELETED ITEMS */
 
     for(
       const oldItem
@@ -3162,10 +3554,7 @@ async function applyChanges(){
     }
 
 
-
-    /* -----------------------------------------
-       RELOAD
-    ----------------------------------------- */
+    /* RELOAD */
 
     await loadCategories();
 
@@ -3211,7 +3600,6 @@ async function applyChanges(){
   }
 
 }
-
 
 
 /* =====================================================
@@ -3276,7 +3664,6 @@ function cancelChanges(){
 }
 
 
-
 /* =====================================================
    RESET SAMPLE MENU
 ===================================================== */
@@ -3316,7 +3703,6 @@ function resetMenu(){
   render();
 
 }
-
 
 
 /* =====================================================
@@ -3369,7 +3755,6 @@ function show(
 }
 
 
-
 /* =====================================================
    QR
 ===================================================== */
@@ -3402,7 +3787,6 @@ function createQR(){
   }
 
 }
-
 
 
 /* =====================================================
@@ -3532,7 +3916,6 @@ async function loadManagers(){
 }
 
 
-
 /* =====================================================
    ADMIN ROUTE
 ===================================================== */
@@ -3571,7 +3954,6 @@ function checkAdminRoute(){
 }
 
 
-
 /* =====================================================
    START
 ===================================================== */
@@ -3583,13 +3965,6 @@ function checkAdminRoute(){
 
 
   if(adminMode){
-
-    /*
-      بسیار مهم:
-      هر بار که ?admin=1 باز شود،
-      session قبلی پاک می‌شود تا رمز
-      دوباره درخواست شود.
-    */
 
     await forceFreshAdminLogin();
 
@@ -3604,7 +3979,6 @@ function checkAdminRoute(){
   }
 
 })();
-
 
 </script>
 
