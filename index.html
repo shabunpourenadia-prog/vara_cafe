@@ -1,11 +1,19 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
 <title>VARA CAFE | منوی کافه وارا</title>
 
 <style>
+
 :root{
   --n:#101b2d;
   --c:#f5efe3;
@@ -58,12 +66,13 @@ button{
 
 .hero{
   min-height:640px;
-  background:linear-gradient(
-    135deg,
-    #101b2d,
-    #17263c 65%,
-    #26354a
-  );
+  background:
+    linear-gradient(
+      135deg,
+      #101b2d,
+      #17263c 65%,
+      #26354a
+    );
   color:#fff;
   display:flex;
   align-items:center;
@@ -364,6 +373,23 @@ section{
   display:none;
   background:#eee7da;
   min-height:100vh;
+  padding:40px 0 70px;
+}
+
+.admin-header{
+  margin-bottom:20px;
+}
+
+.admin-header h1{
+  font-size:32px;
+  letter-spacing:0;
+  margin:0 0 8px;
+  color:var(--n);
+}
+
+.admin-header p{
+  color:var(--m);
+  margin:0;
 }
 
 .adminbox{
@@ -371,29 +397,47 @@ section{
   border-radius:20px;
   padding:24px;
   box-shadow:0 8px 30px rgba(30,35,45,.06);
+  margin-bottom:20px;
 }
 
-.formgrid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+.login-box{
+  max-width:500px;
+  margin:50px auto;
 }
 
-.adminrow{
+.login-title{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.login-title h2{
+  margin:8px 0;
+}
+
+.login-title p{
+  color:var(--m);
+  font-size:13px;
+}
+
+.login-form{
   display:grid;
-  grid-template-columns:1fr 140px 1.5fr 110px 70px;
-  gap:10px;
-  align-items:center;
+  gap:12px;
 }
 
 .admin input,
 .admin select{
   width:100%;
-  padding:12px;
+  padding:12px 13px;
   border:1px solid #ddd;
   border-radius:10px;
   font-family:inherit;
   background:#fff;
+  outline:none;
+}
+
+.admin input:focus,
+.admin select:focus{
+  border-color:var(--g);
 }
 
 .admin button{
@@ -404,20 +448,59 @@ section{
   font-family:inherit;
 }
 
-.admin .primary{
+.primary{
   background:var(--g);
   color:#fff;
 }
 
-.admin .reset{
+.reset{
   background:#fff;
-  border:1px solid #aaa;
+  border:1px solid #aaa!important;
 }
 
-.adminlist{
-  display:grid;
+.logout{
+  background:#101b2d!important;
+  color:#fff!important;
+}
+
+.back-site{
+  background:#fff!important;
+  color:var(--n)!important;
+  border:1px solid #ddd!important;
+}
+
+.change-buttons{
+  display:flex;
   gap:10px;
-  margin-top:20px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.apply-btn{
+  background:#35623a!important;
+  color:#fff!important;
+}
+
+.cancel-btn{
+  background:#fff!important;
+  color:var(--danger)!important;
+  border:1px solid #e0baba!important;
+}
+
+.status{
+  display:block;
+  margin-top:14px;
+  padding:10px 13px;
+  border-radius:10px;
+  background:#eef4ea;
+  color:var(--success);
+  font-size:12px;
+  line-height:1.7;
+}
+
+.error-status{
+  background:#fff0f0;
+  color:var(--danger);
 }
 
 .admin-note{
@@ -427,37 +510,85 @@ section{
   line-height:1.8;
 }
 
-.admin-actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:12px;
+.formgrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:14px;
 }
 
-.logout{
-  background:#101b2d!important;
-  color:#fff!important;
+.adminlist{
+  display:grid;
+  gap:10px;
+  margin-top:20px;
 }
 
-.status{
-  display:inline-block;
-  margin-top:12px;
-  padding:7px 11px;
-  border-radius:999px;
-  background:#eef4ea;
-  color:var(--success);
-  font-size:12px;
+.adminrow{
+  display:grid;
+  grid-template-columns:
+    minmax(140px,1fr)
+    140px
+    minmax(180px,1.5fr)
+    160px
+    70px;
+  gap:10px;
+  align-items:center;
+  padding:12px;
+  border:1px solid #eee;
+  border-radius:14px;
+  background:#fafafa;
 }
 
-.error-status{
+.adminrow button{
   background:#fff0f0;
   color:var(--danger);
 }
 
+.admin-section-title{
+  margin:0 0 8px;
+  font-size:21px;
+}
+
+.admin-welcome{
+  color:var(--m);
+  font-size:13px;
+}
+
+.category-list{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+}
+
+.category-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:12px;
+  border:1px solid #eee;
+  border-radius:14px;
+  background:#fafafa;
+}
+
+.category-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.small-btn{
+  padding:8px 12px!important;
+  font-size:12px;
+}
+
+.delete-btn{
+  background:#fff0f0!important;
+  color:var(--danger)!important;
+}
+
 .manager-box{
   margin-top:25px;
-  border-top:1px solid #eee;
-  padding-top:25px;
 }
 
 .manager-list{
@@ -483,14 +614,12 @@ section{
   font-weight:bold;
 }
 
-.small-btn{
-  padding:8px 12px!important;
-  font-size:12px;
-}
-
-.delete-manager{
-  background:#fff0f0!important;
-  color:var(--danger);
+.admin-top-actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
 /* =========================
@@ -539,6 +668,10 @@ footer{
 
 @media(max-width:720px){
 
+  .wrap{
+    padding:0 16px;
+  }
+
   .links{
     display:none;
   }
@@ -550,8 +683,7 @@ footer{
   .menu,
   .aboutgrid,
   .info,
-  .formgrid,
-  .adminrow{
+  .formgrid{
     grid-template-columns:1fr;
   }
 
@@ -580,84 +712,154 @@ footer{
     grid-column:auto;
   }
 
-  .manager-card{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
   .admin{
-    min-height:100vh;
+    padding:20px 0 50px;
   }
 
   .adminbox{
     padding:18px;
   }
 
-  .adminrow{
-    padding:14px;
-    border:1px solid #eee;
-    border-radius:14px;
-    background:#fafafa;
+  .admin-header h1{
+    font-size:27px;
   }
+
+  .adminrow{
+    grid-template-columns:1fr;
+    padding:14px;
+  }
+
+  .category-row{
+    grid-template-columns:1fr;
+  }
+
+  .category-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .category-actions button{
+    width:100%;
+  }
+
+  .manager-card{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .admin-top-actions{
+    align-items:stretch;
+  }
+
+  .admin-top-actions button{
+    width:100%;
+  }
+
+  .change-buttons{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .change-buttons button{
+    width:100%;
+  }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- =========================
+
+<!-- =====================================================
      CUSTOMER WEBSITE
-========================= -->
+===================================================== -->
 
 <div id="customerSite">
 
+
 <header class="hero">
 
+
 <nav class="nav">
+
 <div class="wrap navin">
 
 <div class="wordmark">
+
 <img
 src="./vara-logo-transparent.png"
 alt="VARA CAFE"
 class="vara-logo"
-onerror="this.style.display='none';this.parentElement.innerHTML='<span class=&quot;wordmark&quot;>VARA CAFE</span>';"
+onerror="
+this.style.display='none';
+this.parentElement.innerHTML='<span>VARA CAFE</span>';
+"
 >
+
 </div>
+
 
 <div class="links">
-<a href="#menu">منو</a>
-<a href="#about">درباره ما</a>
-<a href="#contact">تماس</a>
+
+<a href="#menu">
+منو
+</a>
+
+<a href="#about">
+درباره ما
+</a>
+
+<a href="#contact">
+تماس
+</a>
+
 </div>
 
 </div>
+
 </nav>
+
 
 <div class="wrap">
 
 <div class="hero-content">
 
+
 <div class="eyebrow">
 COFFEE • FOOD • MOMENTS
 </div>
+
 
 <h1>
 VARA<br>
 CAFE
 </h1>
 
+
 <p>
 یک گوشه دنج برای قهوه‌های خوب، غذاهای خوش‌طعم و لحظه‌هایی که دوست دارید کمی آرام‌تر بگذرند.
 </p>
 
-<a class="btn" href="#menu">
+
+<a
+class="btn"
+href="#menu"
+>
 مشاهده منو
 </a>
 
-<a class="btn alt" href="#contact">
+
+<a
+class="btn alt"
+href="#contact"
+>
 اطلاعات کافه
 </a>
+
 
 </div>
 
@@ -665,9 +867,14 @@ CAFE
 
 </header>
 
+
+
+<!-- MENU -->
+
 <section id="menu">
 
 <div class="wrap">
+
 
 <div class="section-head">
 
@@ -685,43 +892,48 @@ OUR MENU
 
 </div>
 
-<div class="tabs">
 
-<button class="tab active" onclick="show('all',this)">
+<!-- مهم: id اضافه شده -->
+
+<div
+class="tabs"
+id="tabs"
+>
+
+<button
+class="tab active"
+onclick="show('all',this)"
+>
 همه
 </button>
 
-<button class="tab" onclick="show('coffee',this)">
-قهوه
-</button>
-
-<button class="tab" onclick="show('cold',this)">
-سرد
-</button>
-
-<button class="tab" onclick="show('food',this)">
-غذا
-</button>
-
-<button class="tab" onclick="show('dessert',this)">
-دسر
-</button>
-
 </div>
 
+
 <div class="menu">
+
 <div class="loading">
 در حال بارگذاری منو...
 </div>
+
 </div>
+
 
 </div>
 
 </section>
 
-<section id="about" class="about">
+
+
+<!-- ABOUT -->
+
+<section
+id="about"
+class="about"
+>
 
 <div class="wrap aboutgrid">
+
 
 <div>
 
@@ -737,33 +949,62 @@ ABOUT VARA
 در وارا قرار نیست عجله داشته باشید. یک قهوه سفارش بدهید، موسیقی را بشنوید و لحظه‌تان را همان‌طور که دوست دارید بگذرانید.
 </p>
 
-<a class="btn" href="#contact">
+<a
+class="btn"
+href="#contact"
+>
 پیدا کردن وارا
 </a>
 
 </div>
 
+
 <div class="facts">
 
+
 <div class="fact">
-<b>هر روز</b>
+
+<b>
+هر روز
+</b>
+
 با شما هستیم
+
 </div>
 
+
 <div class="fact">
-<b>قهوه تازه</b>
+
+<b>
+قهوه تازه
+</b>
+
 با دانه‌های منتخب
+
 </div>
 
+
 <div class="fact">
-<b>فضای دنج</b>
+
+<b>
+فضای دنج
+</b>
+
 برای قرارهای کوچک
+
 </div>
 
+
 <div class="fact">
-<b>سفارش آسان</b>
+
+<b>
+سفارش آسان
+</b>
+
 با منوی دیجیتال
+
 </div>
+
 
 </div>
 
@@ -771,9 +1012,14 @@ ABOUT VARA
 
 </section>
 
+
+
+<!-- CONTACT -->
+
 <section id="contact">
 
 <div class="wrap">
+
 
 <div class="section-head">
 
@@ -791,11 +1037,15 @@ COME VISIT
 
 </div>
 
+
 <div class="info">
+
 
 <div class="card">
 
-<div class="icon">⌖</div>
+<div class="icon">
+⌖
+</div>
 
 <h3>
 آدرس
@@ -808,9 +1058,12 @@ COME VISIT
 
 </div>
 
+
 <div class="card">
 
-<div class="icon">◷</div>
+<div class="icon">
+◷
+</div>
 
 <h3>
 ساعات کاری
@@ -823,9 +1076,12 @@ COME VISIT
 
 </div>
 
+
 <div class="card">
 
-<div class="icon">◎</div>
+<div class="icon">
+◎
+</div>
 
 <h3>
 اینستاگرام
@@ -837,13 +1093,17 @@ COME VISIT
 
 </div>
 
+
 <div class="qr-card">
 
 <h3>
 منوی دیجیتال وارا
 </h3>
 
-<img id="qrCode" alt="QR Code">
+<img
+id="qrCode"
+alt="QR Code"
+>
 
 <p>
 دوربین موبایل را روی این کد بگیرید تا منوی وارا باز شود.
@@ -851,11 +1111,14 @@ COME VISIT
 
 </div>
 
+
 </div>
 
 </div>
 
 </section>
+
+
 
 <footer>
 
@@ -871,7 +1134,9 @@ COME VISIT
 Instagram: @varacafe.sari
 </span>
 
-<span>•</span>
+<span>
+•
+</span>
 
 <span>
 ۸ صبح تا ۱۰ شب
@@ -883,185 +1148,372 @@ Instagram: @varacafe.sari
 
 </footer>
 
+
 </div>
 
 
-<!-- =========================
+
+<!-- =====================================================
      PRIVATE ADMIN
-========================= -->
+===================================================== -->
 
-<section id="admin" class="admin">
+<div
+id="admin"
+class="admin"
+>
 
-<div class="wrap" style="padding-top:70px;padding-bottom:70px">
 
-<div id="loginBox" class="adminbox" style="max-width:460px;margin:auto">
+<div class="wrap">
 
-<div class="section-head">
+
+<!-- LOGIN -->
+
+<div
+id="loginBox"
+class="adminbox login-box"
+>
+
+
+<div class="login-title">
 
 <div class="kicker">
-PRIVATE ACCESS
+VARA ADMIN
 </div>
 
 <h2>
-ورود مدیریت
+ورود به مدیریت
 </h2>
 
 <p>
-فقط مدیران مجاز می‌توانند وارد شوند.
+برای ورود به پنل مدیریت ایمیل و رمز عبور خود را وارد کنید.
 </p>
 
 </div>
+
+
+<div class="login-form">
+
 
 <input
 id="adminEmail"
 type="email"
-autocomplete="email"
-placeholder="ایمیل مدیریت"
-style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px"
+placeholder="ایمیل مدیر"
+autocomplete="username"
 >
+
 
 <input
 id="adminPassword"
 type="password"
-autocomplete="current-password"
 placeholder="رمز عبور"
-style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;margin-top:10px"
+autocomplete="current-password"
 >
+
 
 <button
 class="primary"
 onclick="unlockAdmin()"
-style="margin-top:12px;width:100%"
 >
-ورود امن
+ورود به پنل
 </button>
 
-<div id="loginMsg" class="admin-note">
-ایمیل و رمز حساب مدیریت را وارد کنید.
-</div>
+
+<button
+class="back-site"
+onclick="goToSite()"
+>
+بازگشت به سایت
+</button>
+
+
+<div
+id="loginMsg"
+class="status"
+style="display:none"
+></div>
+
 
 </div>
 
-
-<div id="panel" style="display:none">
-
-<div class="section-head">
-
-<div class="kicker">
-MANAGEMENT
 </div>
 
-<h2>
-پنل مدیریت وارا
-</h2>
 
-<p id="adminWelcome">
-مدیریت منو
-</p>
 
-</div>
+<!-- PANEL -->
+
+<div
+id="panel"
+style="display:none"
+>
 
 
 <div class="adminbox">
 
-<div class="status">
-● ورود مدیریت فعال است
+
+<div class="admin-top-actions">
+
+
+<div>
+
+<div class="kicker">
+VARA ADMIN PANEL
 </div>
 
-<div class="formgrid" style="margin-top:14px">
+<h1 class="admin-section-title">
+مدیریت منوی وارا
+</h1>
+
+<div
+id="adminWelcome"
+class="admin-welcome"
+>
+</div>
+
+</div>
+
+
+<div>
+
+<button
+class="back-site"
+onclick="goToSite()"
+>
+مشاهده سایت
+</button>
+
+<button
+class="logout"
+onclick="lockAdmin()"
+>
+خروج
+</button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- CATEGORY MANAGEMENT -->
+
+<div class="adminbox">
+
+
+<div class="kicker">
+CATEGORIES
+</div>
+
+<h2 class="admin-section-title">
+مدیریت دسته‌ها
+</h2>
+
+
+<p class="admin-note">
+اینجا می‌توانی دسته‌های منو را اضافه یا نام آن‌ها را تغییر بدهی. تغییرات تا وقتی «اعمال تغییرات» را نزنی در سایت ذخیره نمی‌شوند.
+</p>
+
+
+<div class="formgrid">
+
+
+<input
+id="newCategoryName"
+placeholder="نام دسته جدید"
+>
+
+
+<button
+class="primary"
+onclick="addCategory()"
+>
++ افزودن دسته
+</button>
+
+
+</div>
+
+
+<div
+id="categoryList"
+class="category-list"
+>
+در حال بارگذاری دسته‌ها...
+</div>
+
+
+</div>
+
+
+
+<!-- MENU MANAGEMENT -->
+
+<div class="adminbox">
+
+
+<div class="kicker">
+MENU ITEMS
+</div>
+
+<h2 class="admin-section-title">
+مدیریت آیتم‌های منو
+</h2>
+
+
+<div class="formgrid">
+
 
 <input
 id="newName"
 placeholder="نام آیتم"
 >
 
+
 <input
 id="newPrice"
 placeholder="قیمت"
 >
+
 
 <input
 id="newDesc"
 placeholder="توضیحات"
 >
 
+
 <select id="newCat">
-
-<option value="coffee">
-قهوه
-</option>
-
-<option value="cold">
-سرد
-</option>
-
-<option value="food">
-غذا
-</option>
-
-<option value="dessert">
-دسر
-</option>
-
 </select>
+
 
 </div>
 
-<div class="admin-actions">
 
-<button class="primary" onclick="addItem()">
-افزودن آیتم
+<div class="change-buttons">
+
+
+<button
+class="primary"
+onclick="addItem()"
+>
++ افزودن آیتم
 </button>
 
-<button class="reset" onclick="resetMenu()">
+
+<button
+class="reset"
+onclick="resetMenu()"
+>
 بازگردانی منوی نمونه
 </button>
 
-<button class="logout" onclick="lockAdmin()">
-خروج از مدیریت
+
+</div>
+
+
+<div
+id="adminList"
+class="adminlist"
+>
+</div>
+
+
+<hr
+style="
+border:0;
+border-top:1px solid #eee;
+margin:25px 0 0;
+"
+>
+
+
+<div class="change-buttons">
+
+
+<button
+class="apply-btn"
+onclick="applyChanges()"
+>
+✓ اعمال تغییرات
 </button>
 
+
+<button
+class="cancel-btn"
+onclick="cancelChanges()"
+>
+↩ لغو تغییرات
+</button>
+
+
 </div>
 
-<div id="adminList" class="adminlist"></div>
+
+<div
+id="changeStatus"
+class="status"
+>
+هیچ تغییر ذخیره‌نشده‌ای وجود ندارد.
+</div>
+
 
 </div>
 
+
+
+<!-- MANAGERS -->
 
 <div class="adminbox manager-box">
+
 
 <div class="kicker">
 ADMIN TEAM
 </div>
 
-<h2>
+<h2 class="admin-section-title">
 مدیران وارا
 </h2>
+
 
 <p class="admin-note">
 مدیران ثبت‌شده در سیستم در این قسمت نمایش داده می‌شوند.
 </p>
 
-<div id="managerList" class="manager-list">
+
+<div
+id="managerList"
+class="manager-list"
+>
 در حال بارگذاری...
 </div>
 
+
+</div>
+
+
 </div>
 
 </div>
 
 </div>
 
-</section>
 
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
 
-/* =========================
-   SUPABASE
-========================= */
+
+/* =====================================================
+   SUPABASE CONFIG
+===================================================== */
 
 const SUPABASE_URL =
 'https://fhdywhjtyvugxywlgtvb.supabase.co';
@@ -1069,886 +1521,2094 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 'sb_publishable_vuhLtNlZwDWu930nkr7R6g_oorjOzKS';
 
+
 const supabaseClient =
 window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
-let data=[];
-let currentAdmin=null;
 
 
-/* =========================
+/* =====================================================
+   GLOBAL STATE
+===================================================== */
+
+let data = [];
+
+let categories = [];
+
+let originalData = [];
+
+let originalCategories = [];
+
+let currentAdmin = null;
+
+let hasChanges = false;
+
+let categoriesAvailable = true;
+
+
+
+/* =====================================================
    SAFE HTML
-========================= */
+===================================================== */
 
 function escapeHtml(value){
 
-return String(value ?? '')
-.replace(/[&<>"']/g,function(char){
+  return String(value ?? '')
+    .replace(/[&<>"']/g,function(char){
 
-return {
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#039;'
-}[char];
+      return {
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#039;'
+      }[char];
 
-});
-
-}
-
-
-/* =========================
-   RENDER MENU
-========================= */
-
-function render(){
-
-const menu=document.querySelector('.menu');
-
-if(!menu){
-return;
-}
-
-if(!data.length){
-
-menu.innerHTML=`
-<div class="empty">
-هنوز آیتمی در منو ثبت نشده است.
-</div>
-`;
-
-}else{
-
-menu.innerHTML=data.map(function(x){
-
-return `
-<div class="item" data-cat="${escapeHtml(x.category)}">
-
-<div>
-
-<h3>
-${escapeHtml(x.name)}
-</h3>
-
-<p>
-${escapeHtml(x.description)}
-</p>
-
-</div>
-
-<div class="price">
-${escapeHtml(x.price)}
-</div>
-
-</div>
-`;
-
-}).join('');
+    });
 
 }
 
 
-const adminList=
-document.getElementById('adminList');
 
-if(!adminList){
-return;
-}
+/* =====================================================
+   DEFAULT CATEGORIES
+===================================================== */
 
-if(!data.length){
+const defaultCategories = [
 
-adminList.innerHTML=`
-<div class="admin-note">
-هیچ آیتمی وجود ندارد.
-</div>
-`;
+  {
+    name:'قهوه',
+    slug:'coffee'
+  },
 
-return;
-}
+  {
+    name:'سرد',
+    slug:'cold'
+  },
 
-adminList.innerHTML=data.map(function(x,i){
+  {
+    name:'غذا',
+    slug:'food'
+  },
 
-return `
-<div class="adminrow">
-
-<input
-value="${escapeHtml(x.name)}"
-onchange="edit(${i},'name',this.value)"
->
-
-<input
-value="${escapeHtml(x.price)}"
-onchange="edit(${i},'price',this.value)"
->
-
-<input
-value="${escapeHtml(x.description || '')}"
-onchange="edit(${i},'description',this.value)"
->
-
-<select onchange="edit(${i},'category',this.value)">
-
-<option value="coffee" ${x.category==='coffee'?'selected':''}>
-قهوه
-</option>
-
-<option value="cold" ${x.category==='cold'?'selected':''}>
-سرد
-</option>
-
-<option value="food" ${x.category==='food'?'selected':''}>
-غذا
-</option>
-
-<option value="dessert" ${x.category==='dessert'?'selected':''}>
-دسر
-</option>
-
-</select>
-
-<button
-onclick="del(${i})"
-style="background:#fff0f0;color:#b94a48"
->
-حذف
-</button>
-
-</div>
-`;
-
-}).join('');
-
-}
-
-
-/* =========================
-   LOAD MENU
-========================= */
-
-async function loadMenu(){
-
-try{
-
-const result =
-await supabaseClient
-.from('menu_items')
-.select('*')
-.order('created_at',{ascending:true});
-
-
-if(result.error){
-
-console.error(result.error);
-
-document.querySelector('.menu').innerHTML=`
-
-<div class="item">
-
-<div>
-
-<h3>
-خطا در اتصال
-</h3>
-
-<p>
-${escapeHtml(result.error.message)}
-</p>
-
-</div>
-
-</div>
-`;
-
-return;
-
-}
-
-
-data=result.data || [];
-
-
-if(!data.length){
-
-const rows=[
-
-{
-name:'اسپرسو',
-price:'۱۲۰٬۰۰۰',
-description:'شات کلاسیک و خوش‌عطر قهوه',
-category:'coffee'
-},
-
-{
-name:'لاته',
-price:'۱۸۰٬۰۰۰',
-description:'اسپرسو، شیر گرم و فوم لطیف',
-category:'coffee'
-},
-
-{
-name:'کاپوچینو',
-price:'۱۸۰٬۰۰۰',
-description:'اسپرسو با شیر و فوم مخملی',
-category:'coffee'
-},
-
-{
-name:'آیس لاته',
-price:'۱۹۰٬۰۰۰',
-description:'قهوه، شیر سرد و یخ',
-category:'cold'
-},
-
-{
-name:'آیس موکا',
-price:'۲۱۰٬۰۰۰',
-description:'قهوه، شکلات و شیر سرد',
-category:'cold'
-},
-
-{
-name:'پاستا وارا',
-price:'۳۸۰٬۰۰۰',
-description:'پاستای روز با سس مخصوص سرآشپز',
-category:'food'
-},
-
-{
-name:'چیکن ساندویچ',
-price:'۳۲۰٬۰۰۰',
-description:'مرغ گریل، سبزیجات تازه و سس مخصوص',
-category:'food'
-},
-
-{
-name:'چیزکیک',
-price:'۲۲۰٬۰۰۰',
-description:'چیزکیک لطیف با تاپینگ روز',
-category:'dessert'
-}
+  {
+    name:'دسر',
+    slug:'dessert'
+  }
 
 ];
 
-const insert=
-await supabaseClient
-.from('menu_items')
-.insert(rows)
-.select();
 
-if(!insert.error){
 
-data=insert.data || [];
+/* =====================================================
+   DEFAULT MENU
+===================================================== */
+
+const sampleMenu = [
+
+  {
+    name:'اسپرسو',
+    price:'۱۲۰٬۰۰۰',
+    description:'شات کلاسیک و خوش‌عطر قهوه',
+    category:'coffee'
+  },
+
+  {
+    name:'لاته',
+    price:'۱۸۰٬۰۰۰',
+    description:'اسپرسو، شیر گرم و فوم لطیف',
+    category:'coffee'
+  },
+
+  {
+    name:'کاپوچینو',
+    price:'۱۸۰٬۰۰۰',
+    description:'اسپرسو با شیر و فوم مخملی',
+    category:'coffee'
+  },
+
+  {
+    name:'آیس لاته',
+    price:'۱۹۰٬۰۰۰',
+    description:'قهوه، شیر سرد و یخ',
+    category:'cold'
+  },
+
+  {
+    name:'آیس موکا',
+    price:'۲۱۰٬۰۰۰',
+    description:'قهوه، شکلات و شیر سرد',
+    category:'cold'
+  },
+
+  {
+    name:'پاستا وارا',
+    price:'۳۸۰٬۰۰۰',
+    description:'پاستای روز با سس مخصوص سرآشپز',
+    category:'food'
+  },
+
+  {
+    name:'چیکن ساندویچ',
+    price:'۳۲۰٬۰۰۰',
+    description:'مرغ گریل، سبزیجات تازه و سس مخصوص',
+    category:'food'
+  },
+
+  {
+    name:'چیزکیک',
+    price:'۲۲۰٬۰۰۰',
+    description:'چیزکیک لطیف با تاپینگ روز',
+    category:'dessert'
+  }
+
+];
+
+
+
+/* =====================================================
+   SLUG
+===================================================== */
+
+function makeSlug(name){
+
+  const slug =
+    String(name)
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g,'-')
+      .replace(/[^\w\u0600-\u06ff-]/g,'')
+      .replace(/-+/g,'-');
+
+  return slug || ('category-' + Date.now());
 
 }
 
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function markChanged(){
+
+  hasChanges = true;
+
+  const box =
+    document.getElementById('changeStatus');
+
+  if(box){
+
+    box.className = 'status';
+
+    box.textContent =
+      'تغییرات ذخیره نشده‌اند — برای ثبت نهایی «اعمال تغییرات» را بزنید.';
+
+  }
+
 }
 
-render();
 
-}catch(error){
 
-console.error(error);
+/* =====================================================
+   LOAD CATEGORIES
+===================================================== */
 
-document.querySelector('.menu').innerHTML=`
-<div class="item">
-<div>
-<h3>خطای غیرمنتظره</h3>
-<p>${escapeHtml(error.message)}</p>
-</div>
-</div>
-`;
+async function loadCategories(){
+
+  const result =
+    await supabaseClient
+      .from('menu_categories')
+      .select('*')
+      .order('created_at',{
+        ascending:true
+      });
+
+
+  if(result.error){
+
+    console.error(
+      'CATEGORY ERROR:',
+      result.error
+    );
+
+    categoriesAvailable = false;
+
+    categories =
+      JSON.parse(
+        JSON.stringify(defaultCategories)
+      );
+
+    return;
+
+  }
+
+
+  categoriesAvailable = true;
+
+  categories =
+    result.data && result.data.length
+      ? result.data
+      : JSON.parse(
+          JSON.stringify(defaultCategories)
+        );
+
 
 }
 
+
+
+/* =====================================================
+   RENDER TABS
+===================================================== */
+
+function renderTabs(){
+
+  const tabs =
+    document.getElementById('tabs');
+
+  if(!tabs){
+    return;
+  }
+
+
+  let html = `
+
+    <button
+      class="tab active"
+      onclick="show('all',this)"
+    >
+      همه
+    </button>
+
+  `;
+
+
+  categories.forEach(function(category){
+
+    html += `
+
+      <button
+        class="tab"
+        data-cat="${escapeHtml(category.slug)}"
+        onclick="show('${escapeHtml(category.slug)}',this)"
+      >
+        ${escapeHtml(category.name)}
+      </button>
+
+    `;
+
+  });
+
+
+  tabs.innerHTML = html;
+
 }
 
 
-/* =========================
+
+/* =====================================================
+   RENDER CATEGORY PANEL
+===================================================== */
+
+function renderCategories(){
+
+  const list =
+    document.getElementById('categoryList');
+
+  if(!list){
+    return;
+  }
+
+
+  if(!categories.length){
+
+    list.innerHTML = `
+
+      <div class="admin-note">
+        هیچ دسته‌ای ثبت نشده است.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    categories.map(function(category,index){
+
+      return `
+
+        <div class="category-row">
+
+          <input
+            id="categoryName_${index}"
+            value="${escapeHtml(category.name)}"
+          >
+
+          <div class="category-actions">
+
+            <button
+              class="primary small-btn"
+              onclick="renameCategory(${index})"
+            >
+              ✏️ تغییر نام
+            </button>
+
+            <button
+              class="delete-btn small-btn"
+              onclick="deleteCategory(${index})"
+            >
+              🗑 حذف
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join('');
+
+}
+
+
+
+/* =====================================================
+   RENDER EVERYTHING
+===================================================== */
+
+function render(){
+
+  renderTabs();
+
+
+  const menu =
+    document.querySelector('.menu');
+
+
+  if(menu){
+
+    if(!data.length){
+
+      menu.innerHTML = `
+
+        <div class="empty">
+          هنوز آیتمی در منو ثبت نشده است.
+        </div>
+
+      `;
+
+    }else{
+
+      menu.innerHTML =
+        data.map(function(item){
+
+          return `
+
+            <div
+              class="item"
+              data-cat="${escapeHtml(item.category)}"
+            >
+
+              <div>
+
+                <h3>
+                  ${escapeHtml(item.name)}
+                </h3>
+
+                <p>
+                  ${escapeHtml(item.description)}
+                </p>
+
+              </div>
+
+              <div class="price">
+                ${escapeHtml(item.price)}
+              </div>
+
+            </div>
+
+          `;
+
+        }).join('');
+
+    }
+
+  }
+
+
+  const adminList =
+    document.getElementById('adminList');
+
+
+  if(adminList){
+
+    if(!data.length){
+
+      adminList.innerHTML = `
+
+        <div class="admin-note">
+          هیچ آیتمی وجود ندارد.
+        </div>
+
+      `;
+
+    }else{
+
+      adminList.innerHTML =
+        data.map(function(item,index){
+
+          let options = '';
+
+
+          categories.forEach(function(category){
+
+            options += `
+
+              <option
+                value="${escapeHtml(category.slug)}"
+                ${
+                  item.category === category.slug
+                    ? 'selected'
+                    : ''
+                }
+              >
+                ${escapeHtml(category.name)}
+              </option>
+
+            `;
+
+          });
+
+
+          return `
+
+            <div class="adminrow">
+
+              <input
+                value="${escapeHtml(item.name)}"
+                onchange="
+                  editLocal(
+                    ${index},
+                    'name',
+                    this.value
+                  )
+                "
+              >
+
+              <input
+                value="${escapeHtml(item.price)}"
+                onchange="
+                  editLocal(
+                    ${index},
+                    'price',
+                    this.value
+                  )
+                "
+              >
+
+              <input
+                value="${escapeHtml(item.description || '')}"
+                onchange="
+                  editLocal(
+                    ${index},
+                    'description',
+                    this.value
+                  )
+                "
+              >
+
+              <select
+                onchange="
+                  editLocal(
+                    ${index},
+                    'category',
+                    this.value
+                  )
+                "
+              >
+
+                ${options}
+
+              </select>
+
+              <button
+                onclick="deleteLocal(${index})"
+              >
+                حذف
+              </button>
+
+            </div>
+
+          `;
+
+        }).join('');
+
+    }
+
+  }
+
+
+  const newCat =
+    document.getElementById('newCat');
+
+
+  if(newCat){
+
+    newCat.innerHTML =
+      categories.map(function(category){
+
+        return `
+
+          <option
+            value="${escapeHtml(category.slug)}"
+          >
+            ${escapeHtml(category.name)}
+          </option>
+
+        `;
+
+      }).join('');
+
+  }
+
+
+  renderCategories();
+
+}
+
+
+
+/* =====================================================
+   LOAD MENU
+===================================================== */
+
+async function loadMenu(){
+
+  try{
+
+    const result =
+      await supabaseClient
+        .from('menu_items')
+        .select('*')
+        .order('created_at',{
+          ascending:true
+        });
+
+
+    if(result.error){
+
+      console.error(
+        'MENU ERROR:',
+        result.error
+      );
+
+
+      const menu =
+        document.querySelector('.menu');
+
+
+      if(menu){
+
+        menu.innerHTML = `
+
+          <div class="item">
+
+            <div>
+
+              <h3>
+                خطا در اتصال
+              </h3>
+
+              <p>
+                ${escapeHtml(result.error.message)}
+              </p>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+      return;
+
+    }
+
+
+    data =
+      result.data || [];
+
+
+    /*
+      اگر منو خالی بود، نمونه‌ها
+      فقط یک بار وارد دیتابیس می‌شوند.
+    */
+
+    if(!data.length){
+
+      const inserted =
+        await supabaseClient
+          .from('menu_items')
+          .insert(sampleMenu)
+          .select();
+
+
+      if(!inserted.error){
+
+        data =
+          inserted.data || [];
+
+      }
+
+    }
+
+
+    render();
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+
+/* =====================================================
    VERIFY ADMIN
-========================= */
+===================================================== */
 
 async function verifyAdmin(userId){
 
-const result=
-await supabaseClient
-.from('admin_users')
-.select('id,email,role,user_id')
-.eq('user_id',userId)
-.maybeSingle();
+  const result =
+    await supabaseClient
+      .from('admin_users')
+      .select(
+        'id,email,role,user_id'
+      )
+      .eq(
+        'user_id',
+        userId
+      )
+      .maybeSingle();
 
-if(result.error){
 
-console.error(result.error);
+  if(result.error){
 
-return null;
+    console.error(
+      'ADMIN VERIFY ERROR:',
+      result.error
+    );
+
+    return null;
+
+  }
+
+
+  return result.data;
 
 }
 
-return result.data;
-
-}
 
 
-/* =========================
-   SHOW PANEL
-========================= */
+/* =====================================================
+   SHOW ADMIN PANEL
+===================================================== */
 
 async function showAdminPanel(admin){
 
-currentAdmin=admin;
+  currentAdmin =
+    admin;
 
-document.getElementById('loginBox')
-.style.display='none';
 
-document.getElementById('panel')
-.style.display='block';
+  document.getElementById('loginBox')
+    .style.display = 'none';
 
-document.getElementById('adminWelcome')
-.textContent=
-'خوش آمدید — '+admin.email+' — '+admin.role;
 
-await loadMenu();
+  document.getElementById('panel')
+    .style.display = 'block';
 
-await loadManagers();
+
+  document.getElementById('adminWelcome')
+    .textContent =
+      'خوش آمدید — ' +
+      admin.email +
+      ' — ' +
+      (
+        admin.role === 'owner'
+          ? 'مدیر اصلی'
+          : 'مدیر'
+      );
+
+
+  await loadCategories();
+
+  await loadMenu();
+
+
+  originalData =
+    JSON.parse(
+      JSON.stringify(data)
+    );
+
+
+  originalCategories =
+    JSON.parse(
+      JSON.stringify(categories)
+    );
+
+
+  hasChanges = false;
+
+
+  const status =
+    document.getElementById('changeStatus');
+
+
+  if(status){
+
+    status.className = 'status';
+
+    status.textContent =
+      'هیچ تغییر ذخیره‌نشده‌ای وجود ندارد.';
+
+  }
+
+
+  await loadManagers();
 
 }
 
 
-/* =========================
+
+/* =====================================================
    LOGIN
-========================= */
+===================================================== */
 
 async function unlockAdmin(){
 
-const email=
-document.getElementById('adminEmail')
-.value
-.trim();
-
-const password=
-document.getElementById('adminPassword')
-.value;
-
-const msg=
-document.getElementById('loginMsg');
+  const email =
+    document.getElementById(
+      'adminEmail'
+    ).value.trim();
 
 
-if(!email || !password){
+  const password =
+    document.getElementById(
+      'adminPassword'
+    ).value;
 
-msg.textContent=
-'ایمیل و رمز عبور را وارد کنید.';
 
-return;
+  const message =
+    document.getElementById(
+      'loginMsg'
+    );
+
+
+  message.style.display =
+    'block';
+
+
+  message.className =
+    'status';
+
+
+  if(!email || !password){
+
+    message.textContent =
+      'ایمیل و رمز عبور را وارد کنید.';
+
+    return;
+
+  }
+
+
+  message.textContent =
+    'در حال ورود...';
+
+
+  try{
+
+    const result =
+      await supabaseClient.auth
+        .signInWithPassword({
+
+          email:email,
+
+          password:password
+
+        });
+
+
+    if(result.error){
+
+      message.className =
+        'status error-status';
+
+      message.textContent =
+        'ورود ناموفق: ' +
+        result.error.message;
+
+      return;
+
+    }
+
+
+    const user =
+      result.data.user;
+
+
+    const admin =
+      await verifyAdmin(user.id);
+
+
+    if(!admin){
+
+      await supabaseClient.auth.signOut();
+
+
+      message.className =
+        'status error-status';
+
+      message.textContent =
+        'این حساب اجازه ورود به پنل مدیریت وارا را ندارد.';
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      'adminPassword'
+    ).value = '';
+
+
+    await showAdminPanel(admin);
+
+  }catch(error){
+
+    message.className =
+      'status error-status';
+
+    message.textContent =
+      'خطای ورود: ' +
+      error.message;
+
+  }
 
 }
 
-msg.textContent='در حال ورود...';
 
-const login=
-await supabaseClient.auth.signInWithPassword({
-email:email,
-password:password
-});
 
-if(login.error){
+/* =====================================================
+   FORCE PASSWORD
+===================================================== */
 
-msg.textContent=
-'ورود ناموفق: '+login.error.message;
+async function forceFreshAdminLogin(){
 
-return;
+  try{
 
-}
+    await supabaseClient.auth.signOut();
 
-const user=login.data.user;
+  }catch(error){
 
-const admin=
-await verifyAdmin(user.id);
+    console.error(error);
 
-if(!admin){
-
-await supabaseClient.auth.signOut();
-
-msg.textContent=
-'این حساب اجازه ورود به پنل مدیریت وارا را ندارد.';
-
-return;
-
-}
-
-document.getElementById('adminPassword').value='';
-
-await showAdminPanel(admin);
+  }
 
 }
 
 
-/* =========================
-   CHECK EXISTING SESSION
-========================= */
 
-async function checkExistingSession(){
-
-try{
-
-const sessionResult=
-await supabaseClient.auth.getSession();
-
-const session=
-sessionResult.data.session;
-
-if(!session || !session.user){
-
-return;
-
-}
-
-const admin=
-await verifyAdmin(session.user.id);
-
-if(!admin){
-
-await supabaseClient.auth.signOut();
-
-return;
-
-}
-
-await showAdminPanel(admin);
-
-}catch(error){
-
-console.error(error);
-
-}
-
-}
-
-
-/* =========================
+/* =====================================================
    LOGOUT
-========================= */
+===================================================== */
 
 async function lockAdmin(){
 
-await supabaseClient.auth.signOut();
+  if(hasChanges){
 
-currentAdmin=null;
-
-window.location.href=
-window.location.pathname;
-
-}
+    const answer =
+      confirm(
+        'تغییرات ذخیره نشده دارید. قبل از خروج خارج شوید؟'
+      );
 
 
-/* =========================
-   EDIT
-========================= */
+    if(!answer){
+      return;
+    }
 
-async function edit(i,field,value){
+  }
 
-if(!data[i]){
-return;
-}
 
-const result=
-await supabaseClient
-.from('menu_items')
-.update({
-[field]:value
-})
-.eq('id',data[i].id);
+  await supabaseClient.auth.signOut();
 
-if(result.error){
 
-alert(result.error.message);
+  currentAdmin = null;
 
-render();
+  hasChanges = false;
 
-return;
 
-}
-
-data[i][field]=value;
-
-render();
+  window.location.href =
+    window.location.pathname +
+    '?admin=1';
 
 }
 
 
-/* =========================
-   DELETE
-========================= */
 
-async function del(i){
+/* =====================================================
+   GO SITE
+===================================================== */
 
-if(!data[i]){
-return;
-}
+function goToSite(){
 
-if(!confirm('این آیتم حذف شود؟')){
-
-return;
-
-}
-
-const result=
-await supabaseClient
-.from('menu_items')
-.delete()
-.eq('id',data[i].id);
-
-if(result.error){
-
-alert(result.error.message);
-
-return;
-
-}
-
-data.splice(i,1);
-
-render();
+  window.location.href =
+    window.location.pathname;
 
 }
 
 
-/* =========================
-   ADD
-========================= */
 
-async function addItem(){
+/* =====================================================
+   LOCAL EDIT
+===================================================== */
 
-const name=
-document.getElementById('newName')
-.value.trim();
+function editLocal(
+  index,
+  field,
+  value
+){
 
-const price=
-document.getElementById('newPrice')
-.value.trim();
+  if(!data[index]){
+    return;
+  }
 
-const description=
-document.getElementById('newDesc')
-.value.trim();
 
-const category=
-document.getElementById('newCat')
-.value;
+  data[index][field] =
+    value;
 
-if(!name || !price){
 
-alert('نام و قیمت را وارد کنید');
-
-return;
-
-}
-
-const result=
-await supabaseClient
-.from('menu_items')
-.insert({
-name:name,
-price:price,
-description:description,
-category:category
-})
-.select()
-.single();
-
-if(result.error){
-
-alert(result.error.message);
-
-return;
-
-}
-
-data.push(result.data);
-
-render();
-
-document.getElementById('newName').value='';
-document.getElementById('newPrice').value='';
-document.getElementById('newDesc').value='';
+  markChanged();
 
 }
 
 
-/* =========================
-   RESET
-========================= */
 
-async function resetMenu(){
+/* =====================================================
+   LOCAL DELETE
+===================================================== */
 
-if(!confirm(
-'منوی فعلی حذف و منوی نمونه جایگزین شود؟'
-)){
+function deleteLocal(index){
 
-return;
+  if(!data[index]){
+    return;
+  }
+
+
+  if(
+    !confirm(
+      'این آیتم حذف شود؟'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  data.splice(
+    index,
+    1
+  );
+
+
+  markChanged();
+
+  render();
 
 }
 
-const result=
-await supabaseClient
-.from('menu_items')
-.delete()
-.not('id','is',null);
 
-if(result.error){
 
-alert(result.error.message);
+/* =====================================================
+   ADD ITEM
+===================================================== */
 
-return;
+function addItem(){
+
+  const name =
+    document.getElementById(
+      'newName'
+    ).value.trim();
+
+
+  const price =
+    document.getElementById(
+      'newPrice'
+    ).value.trim();
+
+
+  const description =
+    document.getElementById(
+      'newDesc'
+    ).value.trim();
+
+
+  const category =
+    document.getElementById(
+      'newCat'
+    ).value;
+
+
+  if(!name || !price){
+
+    alert(
+      'نام و قیمت را وارد کنید.'
+    );
+
+    return;
+
+  }
+
+
+  if(!category){
+
+    alert(
+      'لطفاً یک دسته انتخاب کنید.'
+    );
+
+    return;
+
+  }
+
+
+  data.push({
+
+    name:name,
+
+    price:price,
+
+    description:description,
+
+    category:category,
+
+    __new:true
+
+  });
+
+
+  document.getElementById(
+    'newName'
+  ).value = '';
+
+
+  document.getElementById(
+    'newPrice'
+  ).value = '';
+
+
+  document.getElementById(
+    'newDesc'
+  ).value = '';
+
+
+  markChanged();
+
+  render();
 
 }
 
-data=[];
 
-await loadMenu();
+
+/* =====================================================
+   ADD CATEGORY
+===================================================== */
+
+function addCategory(){
+
+  if(!categoriesAvailable){
+
+    alert(
+      'جدول menu_categories در Supabase ساخته نشده است. ابتدا SQL مربوط به دسته‌ها را اجرا کن.'
+    );
+
+    return;
+
+  }
+
+
+  const input =
+    document.getElementById(
+      'newCategoryName'
+    );
+
+
+  const name =
+    input.value.trim();
+
+
+  if(!name){
+
+    alert(
+      'نام دسته را وارد کنید.'
+    );
+
+    return;
+
+  }
+
+
+  const slug =
+    makeSlug(name);
+
+
+  if(
+    categories.some(
+      x => x.slug === slug
+    )
+  ){
+
+    alert(
+      'این دسته قبلاً وجود دارد.'
+    );
+
+    return;
+
+  }
+
+
+  categories.push({
+
+    name:name,
+
+    slug:slug,
+
+    __new:true
+
+  });
+
+
+  input.value = '';
+
+
+  markChanged();
+
+  render();
 
 }
 
 
-/* =========================
+
+/* =====================================================
+   RENAME CATEGORY
+===================================================== */
+
+function renameCategory(index){
+
+  if(!categories[index]){
+    return;
+  }
+
+
+  if(!categoriesAvailable){
+
+    alert(
+      'برای تغییر دائمی دسته‌ها باید جدول menu_categories در Supabase ساخته شود.'
+    );
+
+    return;
+
+  }
+
+
+  const input =
+    document.getElementById(
+      'categoryName_' + index
+    );
+
+
+  const name =
+    input.value.trim();
+
+
+  if(!name){
+
+    alert(
+      'نام دسته نمی‌تواند خالی باشد.'
+    );
+
+    return;
+
+  }
+
+
+  categories[index].name =
+    name;
+
+
+  markChanged();
+
+  render();
+
+}
+
+
+
+/* =====================================================
+   DELETE CATEGORY
+===================================================== */
+
+function deleteCategory(index){
+
+  if(!categories[index]){
+    return;
+  }
+
+
+  if(!categoriesAvailable){
+
+    alert(
+      'برای حذف دائمی دسته‌ها باید جدول menu_categories در Supabase ساخته شود.'
+    );
+
+    return;
+
+  }
+
+
+  const slug =
+    categories[index].slug;
+
+
+  const hasItems =
+    data.some(
+      item =>
+        item.category === slug
+    );
+
+
+  if(hasItems){
+
+    alert(
+      'این دسته هنوز آیتم دارد. ابتدا آیتم‌های آن را به یک دسته دیگر منتقل کنید.'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      'این دسته حذف شود؟'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  categories.splice(
+    index,
+    1
+  );
+
+
+  markChanged();
+
+  render();
+
+}
+
+
+
+/* =====================================================
+   APPLY CHANGES
+===================================================== */
+
+async function applyChanges(){
+
+  if(!currentAdmin){
+
+    return;
+
+  }
+
+
+  const status =
+    document.getElementById(
+      'changeStatus'
+    );
+
+
+  if(
+    !hasChanges
+  ){
+
+    status.textContent =
+      'تغییری برای ذخیره وجود ندارد.';
+
+    return;
+
+  }
+
+
+  status.className =
+    'status';
+
+
+  status.textContent =
+    'در حال اعمال تغییرات...';
+
+
+  try{
+
+
+    /* -----------------------------------------
+       CATEGORY CHECK
+    ----------------------------------------- */
+
+    if(
+      !categoriesAvailable &&
+      (
+        categories.length !==
+        originalCategories.length
+      )
+    ){
+
+      throw new Error(
+        'جدول menu_categories در Supabase وجود ندارد.'
+      );
+
+    }
+
+
+
+    /* -----------------------------------------
+       NEW CATEGORIES
+    ----------------------------------------- */
+
+    for(
+      const category
+      of categories.filter(
+        x => x.__new
+      )
+    ){
+
+      const result =
+        await supabaseClient
+          .from('menu_categories')
+          .insert({
+
+            name:
+              category.name,
+
+            slug:
+              category.slug
+
+          })
+          .select()
+          .single();
+
+
+      if(result.error){
+
+        throw result.error;
+
+      }
+
+
+      Object.assign(
+        category,
+        result.data
+      );
+
+
+      delete category.__new;
+
+    }
+
+
+
+    /* -----------------------------------------
+       UPDATE / DELETE CATEGORIES
+    ----------------------------------------- */
+
+    for(
+      const oldCategory
+      of originalCategories
+    ){
+
+      const current =
+        categories.find(
+          x =>
+            x.id ===
+            oldCategory.id
+        );
+
+
+      if(!current){
+
+        const result =
+          await supabaseClient
+            .from('menu_categories')
+            .delete()
+            .eq(
+              'id',
+              oldCategory.id
+            );
+
+
+        if(result.error){
+
+          throw result.error;
+
+        }
+
+      }else if(
+        current.name !==
+        oldCategory.name
+      ){
+
+        const result =
+          await supabaseClient
+            .from('menu_categories')
+            .update({
+
+              name:
+                current.name
+
+            })
+            .eq(
+              'id',
+              oldCategory.id
+            );
+
+
+        if(result.error){
+
+          throw result.error;
+
+        }
+
+      }
+
+    }
+
+
+
+    /* -----------------------------------------
+       NEW + UPDATED ITEMS
+    ----------------------------------------- */
+
+    for(
+      const item
+      of data
+    ){
+
+      if(item.__new){
+
+        const result =
+          await supabaseClient
+            .from('menu_items')
+            .insert({
+
+              name:
+                item.name,
+
+              price:
+                item.price,
+
+              description:
+                item.description,
+
+              category:
+                item.category
+
+            })
+            .select()
+            .single();
+
+
+        if(result.error){
+
+          throw result.error;
+
+        }
+
+
+        Object.assign(
+          item,
+          result.data
+        );
+
+
+        delete item.__new;
+
+
+      }else{
+
+        const old =
+          originalData.find(
+            x =>
+              x.id ===
+              item.id
+          );
+
+
+        if(
+          old &&
+          (
+            old.name !==
+              item.name ||
+
+            old.price !==
+              item.price ||
+
+            old.description !==
+              item.description ||
+
+            old.category !==
+              item.category
+          )
+        ){
+
+          const result =
+            await supabaseClient
+              .from('menu_items')
+              .update({
+
+                name:
+                  item.name,
+
+                price:
+                  item.price,
+
+                description:
+                  item.description,
+
+                category:
+                  item.category
+
+              })
+              .eq(
+                'id',
+                item.id
+              );
+
+
+          if(result.error){
+
+            throw result.error;
+
+          }
+
+        }
+
+      }
+
+    }
+
+
+
+    /* -----------------------------------------
+       DELETED ITEMS
+    ----------------------------------------- */
+
+    for(
+      const oldItem
+      of originalData
+    ){
+
+      const exists =
+        data.some(
+          x =>
+            x.id ===
+            oldItem.id
+        );
+
+
+      if(!exists){
+
+        const result =
+          await supabaseClient
+            .from('menu_items')
+            .delete()
+            .eq(
+              'id',
+              oldItem.id
+            );
+
+
+        if(result.error){
+
+          throw result.error;
+
+        }
+
+      }
+
+    }
+
+
+
+    /* -----------------------------------------
+       RELOAD
+    ----------------------------------------- */
+
+    await loadCategories();
+
+    await loadMenu();
+
+
+    originalData =
+      JSON.parse(
+        JSON.stringify(data)
+      );
+
+
+    originalCategories =
+      JSON.parse(
+        JSON.stringify(categories)
+      );
+
+
+    hasChanges = false;
+
+
+    status.className =
+      'status';
+
+
+    status.textContent =
+      '✓ تغییرات با موفقیت اعمال شد.';
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    status.className =
+      'status error-status';
+
+
+    status.textContent =
+      'خطا در اعمال تغییرات: ' +
+      error.message;
+
+  }
+
+}
+
+
+
+/* =====================================================
+   CANCEL CHANGES
+===================================================== */
+
+function cancelChanges(){
+
+  if(!hasChanges){
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      'همه تغییرات اعمال‌نشده لغو شوند؟'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  data =
+    JSON.parse(
+      JSON.stringify(
+        originalData
+      )
+    );
+
+
+  categories =
+    JSON.parse(
+      JSON.stringify(
+        originalCategories
+      )
+    );
+
+
+  hasChanges = false;
+
+
+  render();
+
+
+  const status =
+    document.getElementById(
+      'changeStatus'
+    );
+
+
+  status.className =
+    'status';
+
+
+  status.textContent =
+    'تغییرات لغو شد.';
+
+}
+
+
+
+/* =====================================================
+   RESET SAMPLE MENU
+===================================================== */
+
+function resetMenu(){
+
+  if(
+    !confirm(
+      'منوی فعلی با منوی نمونه جایگزین شود؟'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  data =
+    JSON.parse(
+      JSON.stringify(
+        sampleMenu
+      )
+    );
+
+
+  data =
+    data.map(
+      item => ({
+        ...item,
+        __new:true
+      })
+    );
+
+
+  markChanged();
+
+  render();
+
+}
+
+
+
+/* =====================================================
    FILTER
-========================= */
+===================================================== */
 
-function show(category,button){
+function show(
+  category,
+  button
+){
 
-document.querySelectorAll('.tab')
-.forEach(function(x){
+  document
+    .querySelectorAll('.tab')
+    .forEach(
+      function(tab){
 
-x.classList.remove('active');
+        tab.classList.remove(
+          'active'
+        );
 
-});
+      }
+    );
 
-button.classList.add('active');
 
-document.querySelectorAll('.item')
-.forEach(function(item){
+  if(button){
 
-item.style.display=
-(
-category==='all' ||
-item.dataset.cat===category
-)
-?'flex':'none';
+    button.classList.add(
+      'active'
+    );
 
-});
+  }
+
+
+  document
+    .querySelectorAll('.item')
+    .forEach(
+      function(item){
+
+        item.style.display =
+          (
+            category === 'all' ||
+            item.dataset.cat === category
+          )
+          ? 'flex'
+          : 'none';
+
+      }
+    );
 
 }
 
 
-/* =========================
+
+/* =====================================================
    QR
-========================= */
+===================================================== */
 
 function createQR(){
 
-const currentURL=
-window.location.origin+
-window.location.pathname;
+  const currentURL =
+    window.location.origin +
+    window.location.pathname;
 
-const qrURL=
-'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+
-encodeURIComponent(currentURL);
 
-const qr=
-document.getElementById('qrCode');
+  const qrURL =
+    'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' +
+    encodeURIComponent(
+      currentURL
+    );
 
-if(qr){
 
-qr.src=qrURL;
+  const qr =
+    document.getElementById(
+      'qrCode'
+    );
+
+
+  if(qr){
+
+    qr.src =
+      qrURL;
+
+  }
 
 }
 
-}
 
 
-/* =========================
-   LOAD MANAGERS
-========================= */
+/* =====================================================
+   MANAGERS
+===================================================== */
 
 async function loadManagers(){
 
-const list=
-document.getElementById('managerList');
+  const list =
+    document.getElementById(
+      'managerList'
+    );
 
-if(!list || !currentAdmin){
 
-return;
+  if(
+    !list ||
+    !currentAdmin
+  ){
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    'در حال بارگذاری...';
+
+
+  const result =
+    await supabaseClient
+      .from('admin_users')
+      .select(
+        'id,email,role,created_at,user_id'
+      )
+      .order(
+        'created_at',
+        {
+          ascending:true
+        }
+      );
+
+
+  if(result.error){
+
+    console.error(
+      result.error
+    );
+
+
+    list.innerHTML =
+      'امکان دریافت لیست مدیران وجود ندارد.';
+
+    return;
+
+  }
+
+
+  if(
+    !result.data ||
+    !result.data.length
+  ){
+
+    list.innerHTML =
+      'مدیری ثبت نشده است.';
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    result.data
+      .map(
+        function(manager){
+
+          return `
+
+            <div class="manager-card">
+
+              <div>
+
+                <strong>
+                  ${escapeHtml(
+                    manager.email
+                  )}
+                </strong>
+
+                <br>
+
+                <span class="role">
+
+                  ${
+                    manager.role === 'owner'
+                      ? 'مدیر اصلی'
+                      : 'مدیر'
+                  }
+
+                </span>
+
+              </div>
+
+
+              <div>
+
+                ${
+                  manager.user_id ===
+                  currentAdmin.user_id
+
+                    ? `
+                      <span class="role">
+                        حساب فعلی
+                      </span>
+                    `
+                    : ''
+                }
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join('');
 
 }
 
-list.innerHTML='در حال بارگذاری...';
-
-const result=
-await supabaseClient
-.from('admin_users')
-.select('id,email,role,created_at,user_id')
-.order('created_at',{ascending:true});
-
-if(result.error){
-
-console.error(result.error);
-
-list.innerHTML=
-'امکان دریافت لیست مدیران وجود ندارد.';
-
-return;
-
-}
-
-if(!result.data.length){
-
-list.innerHTML=
-'مدیری ثبت نشده است.';
-
-return;
-
-}
-
-list.innerHTML=
-result.data.map(function(manager){
-
-return `
-<div class="manager-card">
-
-<div>
-
-<strong>
-${escapeHtml(manager.email)}
-</strong>
-
-<br>
-
-<span class="role">
-${manager.role === 'owner' ? 'مدیر اصلی' : 'مدیر'}
-</span>
-
-</div>
-
-<div>
-
-${
-manager.user_id === currentAdmin.user_id
-?
-'<span class="role">حساب فعلی</span>'
-:
-''
-}
-
-</div>
-
-</div>
-`;
-
-}).join('');
-
-}
 
 
-/* =========================
+/* =====================================================
    ADMIN ROUTE
-========================= */
+===================================================== */
 
 function checkAdminRoute(){
 
-const params=
-new URLSearchParams(
-window.location.search
-);
-
-if(params.get('admin')==='1'){
-
-document.getElementById('customerSite')
-.style.display='none';
-
-document.getElementById('admin')
-.style.display='block';
-
-return true;
-
-}
-
-return false;
-
-}
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
 
 
-/* =========================
-   AUTH STATE
-========================= */
+  if(
+    params.get('admin') === '1'
+  ){
 
-supabaseClient.auth.onAuthStateChange(
-async function(event,session){
+    document.getElementById(
+      'customerSite'
+    ).style.display =
+      'none';
 
-if(event==='SIGNED_OUT'){
 
-currentAdmin=null;
+    document.getElementById(
+      'admin'
+    ).style.display =
+      'block';
 
-return;
+
+    return true;
+
+  }
+
+
+  return false;
 
 }
 
-if(
-session &&
-(
-event==='SIGNED_IN' ||
-event==='INITIAL_SESSION'
-)
-){
-
-const params=
-new URLSearchParams(
-window.location.search
-);
-
-if(params.get('admin')!=='1'){
-return;
-}
-
-const admin=
-await verifyAdmin(session.user.id);
-
-if(admin){
-
-await showAdminPanel(admin);
-
-}
-
-}
-
-});
 
 
-/* =========================
+/* =====================================================
    START
-========================= */
+===================================================== */
 
 (async function(){
 
-const adminMode=
-checkAdminRoute();
+  const adminMode =
+    checkAdminRoute();
 
-if(!adminMode){
 
-await loadMenu();
+  if(adminMode){
 
-createQR();
+    /*
+      بسیار مهم:
+      هر بار که ?admin=1 باز شود،
+      session قبلی پاک می‌شود تا رمز
+      دوباره درخواست شود.
+    */
 
-}else{
+    await forceFreshAdminLogin();
 
-await checkExistingSession();
+  }else{
 
-}
+    await loadCategories();
+
+    await loadMenu();
+
+    createQR();
+
+  }
 
 })();
 
+
 </script>
 
+
 </body>
+
 </html>
