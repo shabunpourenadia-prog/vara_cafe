@@ -1339,8 +1339,51 @@ footer{
 
 .adminrow{
   padding:20px 0;
-
   border-bottom:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  align-items:center;
+}
+
+.adminrow input,
+.adminrow select{
+  min-width:0;
+  width:100%;
+}
+
+.admin-image-tools{
+  grid-column:1 / -1;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.admin-image-preview{
+  width:76px;
+  height:76px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#f4f0e8;
+}
+
+.admin-image-tools input[type=file]{
+  max-width:100%;
+  font-size:12px;
+}
+
+.menu-item-photo{
+  width:100%;
+  max-height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+
+@media(max-width:600px){
+  .adminrow{grid-template-columns:1fr;}
 }
 
 .change-buttons{
@@ -2864,6 +2907,8 @@ function render(){
 
               <div>
 
+                ${item.image_url ? `<img class="menu-item-photo" src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.name)}" loading="lazy">` : ''}
+
                 <h3>
                   ${escapeHtml(item.name)}
                 </h3>
@@ -2983,6 +3028,26 @@ function render(){
                 ${options}
 
               </select>
+
+              <div class="admin-image-tools">
+
+                <img
+                  class="admin-image-preview"
+                  src="${escapeHtml(item.image_url || '')}"
+                  alt="پیش‌نمایش عکس"
+                  style="${item.image_url ? '' : 'display:none;'}"
+                >
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  aria-label="انتخاب عکس برای ${escapeHtml(item.name)}"
+                  onchange="uploadItemImage(${index}, this)"
+                >
+
+                <span class="admin-note">عکس منو (JPG یا PNG)</span>
+
+              </div>
 
               <button
                 onclick="deleteLocal(${index})"
@@ -3595,6 +3660,8 @@ function addItem(){
 
     category:category,
 
+    image_url:'',
+
     __new:true
 
   });
@@ -3619,6 +3686,72 @@ function addItem(){
 
   render();
 
+}
+
+
+/* =====================================================
+   UPLOAD MENU ITEM IMAGE
+===================================================== */
+
+async function uploadItemImage(index, input){
+
+  const file = input && input.files ? input.files[0] : null;
+  if(!file || !data[index]) return;
+
+  if(!file.type || !file.type.startsWith('image/')){
+    alert('لطفاً یک فایل تصویری انتخاب کنید.');
+    input.value = '';
+    return;
+  }
+
+  if(file.size > 5 * 1024 * 1024){
+    alert('حجم عکس باید کمتر از ۵ مگابایت باشد.');
+    input.value = '';
+    return;
+  }
+
+  if(!currentAdmin){
+    alert('ابتدا با حساب مدیر وارد شوید.');
+    input.value = '';
+    return;
+  }
+
+  const row = input.closest('.adminrow');
+  const preview = row ? row.querySelector('.admin-image-preview') : null;
+  const status = document.getElementById('changeStatus');
+  if(status) status.textContent = 'در حال بارگذاری عکس...';
+
+  try{
+    const extension = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g,'') || 'jpg';
+    const itemKey = data[index].id || ('new-' + (crypto.randomUUID ? crypto.randomUUID() : Date.now()));
+    const filePath = itemKey + '/' + Date.now() + '.' + extension;
+
+    const uploaded = await supabaseClient.storage
+      .from('menu-images')
+      .upload(filePath, file, { upsert:true, contentType:file.type });
+
+    if(uploaded.error) throw uploaded.error;
+
+    const publicResult = supabaseClient.storage
+      .from('menu-images')
+      .getPublicUrl(filePath);
+
+    data[index].image_url = publicResult.data.publicUrl;
+    markChanged();
+
+    if(preview){
+      preview.src = data[index].image_url;
+      preview.style.display = 'block';
+    }
+
+    if(status) status.textContent = 'عکس بارگذاری شد؛ برای ثبت نهایی «اعمال تغییرات» را بزنید.';
+    input.value = '';
+
+  }catch(error){
+    console.error('IMAGE UPLOAD ERROR:', error);
+    if(status) status.textContent = 'خطا در بارگذاری عکس: ' + (error.message || 'خطای نامشخص');
+    alert('بارگذاری عکس انجام نشد: ' + (error.message || 'خطای نامشخص'));
+  }
 }
 
 
@@ -4012,7 +4145,10 @@ async function applyChanges(){
                 item.description,
 
               category:
-                item.category
+                item.category,
+
+              image_url:
+                item.image_url || null
 
             })
             .select()
@@ -4058,7 +4194,10 @@ async function applyChanges(){
               item.description ||
 
             old.category !==
-              item.category
+              item.category ||
+
+            (old.image_url || '') !==
+              (item.image_url || '')
           )
         ){
 
@@ -4077,7 +4216,10 @@ async function applyChanges(){
                   item.description,
 
                 category:
-                  item.category
+                  item.category,
+
+                image_url:
+                  item.image_url || null
 
               })
               .eq(
