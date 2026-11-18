@@ -1338,7 +1338,12 @@ footer{
 }
 
 .adminrow{
-  padding:20px 0;
+  padding:20px;
+  margin:12px 0;
+  border:1px solid rgba(184,148,91,.25);
+  border-radius:20px;
+  background:linear-gradient(145deg,#fffdf8,#f7f1e7);
+  box-shadow:0 8px 24px rgba(16,27,45,.055);
   border-bottom:1px solid var(--line);
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1352,35 +1357,20 @@ footer{
   width:100%;
 }
 
-.admin-image-tools{
-  grid-column:1 / -1;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.admin-image-preview{
-  width:76px;
-  height:76px;
-  object-fit:cover;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:#f4f0e8;
-}
-
-.admin-image-tools input[type=file]{
-  max-width:100%;
-  font-size:12px;
-}
-
-.menu-item-photo{
-  width:100%;
-  max-height:220px;
-  object-fit:cover;
-  border-radius:12px;
-  margin-bottom:12px;
-}
+.admin-image-tools{grid-column:1/-1;display:flex;flex-direction:column;gap:13px;padding:15px;background:linear-gradient(135deg,rgba(184,148,91,.10),rgba(16,27,45,.035));border:1px solid rgba(184,148,91,.28);border-radius:18px}
+.admin-gallery-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.admin-gallery-title{font-weight:800;color:var(--navy);font-size:13px}
+.admin-gallery-hint{font-size:11px;color:#8b806f}
+.admin-gallery{display:flex;gap:10px;flex-wrap:wrap}
+.admin-photo{position:relative;width:82px;height:82px;border-radius:14px;overflow:hidden;border:1px solid rgba(184,148,91,.45);background:#eee7db;box-shadow:0 4px 14px #101b2d12}
+.admin-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.admin-photo-remove{position:absolute;top:4px;right:4px;width:24px;height:24px;border:0;border-radius:50%;background:#8d2929;color:white;font-size:17px;line-height:1;cursor:pointer;padding:0}
+.admin-add-photo{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 15px;border-radius:12px;background:var(--navy);color:var(--cream);font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--navy)}
+.admin-add-photo input{display:none}
+.admin-empty-photos{font-size:12px;color:#928875;padding:8px 0}
+.menu-item-gallery{display:flex;gap:9px;overflow-x:auto;padding:2px 1px 10px;margin-bottom:10px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.menu-item-gallery img{width: min(78vw,270px);height:190px;flex:0 0 auto;object-fit:cover;border-radius:16px;scroll-snap-align:start;box-shadow:0 8px 22px #101b2d20}
+.menu-item-gallery img:only-child{width:100%;max-height:220px}
 
 @media(max-width:600px){
   .adminrow{grid-template-columns:1fr;}
@@ -2514,6 +2504,8 @@ let currentAdmin = null;
 
 let hasChanges = false;
 
+let pendingImageDeletes = [];
+
 let categoriesAvailable = true;
 
 
@@ -2907,7 +2899,7 @@ function render(){
 
               <div>
 
-                ${item.image_url ? `<img class="menu-item-photo" src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.name)}" loading="lazy">` : ''}
+                ${getItemImages(item).length ? `<div class="menu-item-gallery">${getItemImages(item).map(url => `<img src="${escapeHtml(url)}" alt="${escapeHtml(item.name)}" loading="lazy">`).join('')}</div>` : ''}
 
                 <h3>
                   ${escapeHtml(item.name)}
@@ -3030,23 +3022,15 @@ function render(){
               </select>
 
               <div class="admin-image-tools">
-
-                <img
-                  class="admin-image-preview"
-                  src="${escapeHtml(item.image_url || '')}"
-                  alt="پیش‌نمایش عکس"
-                  style="${item.image_url ? '' : 'display:none;'}"
-                >
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  aria-label="انتخاب عکس برای ${escapeHtml(item.name)}"
-                  onchange="uploadItemImage(${index}, this)"
-                >
-
-                <span class="admin-note">عکس منو (JPG یا PNG)</span>
-
+                <div class="admin-gallery-head">
+                  <span class="admin-gallery-title">گالری عکس محصول</span>
+                  <span class="admin-gallery-hint">${getItemImages(item).length} عکس</span>
+                </div>
+                <div class="admin-gallery">
+                  ${getItemImages(item).length ? getItemImages(item).map((url,imageIndex)=>`<div class="admin-photo"><img src="${escapeHtml(url)}" alt="عکس ${escapeHtml(item.name)}"><button type="button" class="admin-photo-remove" onclick="removeItemImage(${index},${imageIndex})" aria-label="حذف عکس">×</button></div>`).join('') : '<div class="admin-empty-photos">هنوز عکسی برای این آیتم ثبت نشده</div>'}
+                </div>
+                <label class="admin-add-photo">＋ افزودن عکس <input type="file" accept="image/*" multiple onchange="uploadItemImages(${index},this)"></label>
+                <span class="admin-gallery-hint">می‌تونی چند عکس رو هم‌زمان انتخاب کنی؛ حداکثر ۵ مگابایت برای هر عکس</span>
               </div>
 
               <button
@@ -3216,7 +3200,7 @@ async function loadMenu(){
 
 
     data =
-      result.data || [];
+      (result.data || []).map(item => ({...item, image_urls:Array.isArray(item.image_urls) && item.image_urls.length ? item.image_urls : (item.image_url ? [item.image_url] : [])}));
 
 
     if(!data.length){
@@ -3661,6 +3645,7 @@ function addItem(){
     category:category,
 
     image_url:'',
+    image_urls:[],
 
     __new:true
 
@@ -3693,65 +3678,46 @@ function addItem(){
    UPLOAD MENU ITEM IMAGE
 ===================================================== */
 
-async function uploadItemImage(index, input){
+function getItemImages(item){
+  if(Array.isArray(item?.image_urls) && item.image_urls.length) return item.image_urls.filter(Boolean);
+  return item?.image_url ? [item.image_url] : [];
+}
 
-  const file = input && input.files ? input.files[0] : null;
-  if(!file || !data[index]) return;
+function storagePathFromPublicUrl(url){
+  try{const marker='/storage/v1/object/public/menu-images/';const i=url.indexOf(marker);return i>=0?decodeURIComponent(url.slice(i+marker.length)):null;}catch(e){return null;}
+}
 
-  if(!file.type || !file.type.startsWith('image/')){
-    alert('لطفاً یک فایل تصویری انتخاب کنید.');
-    input.value = '';
-    return;
+async function uploadItemImages(index,input){
+  const files=Array.from(input?.files||[]);if(!files.length||!data[index])return;
+  if(!currentAdmin){alert('ابتدا با حساب مدیر وارد شوید.');input.value='';return;}
+  for(const file of files){
+    if(!file.type?.startsWith('image/')){alert('فقط فایل تصویری انتخاب کن.');input.value='';return;}
+    if(file.size>5*1024*1024){alert('حجم هر عکس باید کمتر از ۵ مگابایت باشد.');input.value='';return;}
   }
-
-  if(file.size > 5 * 1024 * 1024){
-    alert('حجم عکس باید کمتر از ۵ مگابایت باشد.');
-    input.value = '';
-    return;
-  }
-
-  if(!currentAdmin){
-    alert('ابتدا با حساب مدیر وارد شوید.');
-    input.value = '';
-    return;
-  }
-
-  const row = input.closest('.adminrow');
-  const preview = row ? row.querySelector('.admin-image-preview') : null;
-  const status = document.getElementById('changeStatus');
-  if(status) status.textContent = 'در حال بارگذاری عکس...';
-
+  const status=document.getElementById('changeStatus');
   try{
-    const extension = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g,'') || 'jpg';
-    const itemKey = data[index].id || ('new-' + (crypto.randomUUID ? crypto.randomUUID() : Date.now()));
-    const filePath = itemKey + '/' + Date.now() + '.' + extension;
-
-    const uploaded = await supabaseClient.storage
-      .from('menu-images')
-      .upload(filePath, file, { upsert:true, contentType:file.type });
-
-    if(uploaded.error) throw uploaded.error;
-
-    const publicResult = supabaseClient.storage
-      .from('menu-images')
-      .getPublicUrl(filePath);
-
-    data[index].image_url = publicResult.data.publicUrl;
-    markChanged();
-
-    if(preview){
-      preview.src = data[index].image_url;
-      preview.style.display = 'block';
+    const itemKey=data[index].id||('new-'+(crypto.randomUUID?crypto.randomUUID():Date.now()));
+    for(const file of files){
+      if(status)status.textContent='در حال بارگذاری عکس‌ها...';
+      const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+      const path=itemKey+'/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'.'+ext;
+      const up=await supabaseClient.storage.from('menu-images').upload(path,file,{upsert:false,contentType:file.type});
+      if(up.error)throw up.error;
+      const pub=supabaseClient.storage.from('menu-images').getPublicUrl(path);
+      data[index].image_urls=[...getItemImages(data[index]),pub.data.publicUrl];
     }
+    data[index].image_url=data[index].image_urls[0]||'';markChanged();render();
+    if(status)status.textContent='عکس‌ها اضافه شدند؛ برای ثبت نهایی «اعمال تغییرات» را بزن.';
+  }catch(error){console.error(error);alert('بارگذاری عکس انجام نشد: '+(error.message||error));if(status)status.textContent='خطا در بارگذاری عکس';}
+  input.value='';
+}
 
-    if(status) status.textContent = 'عکس بارگذاری شد؛ برای ثبت نهایی «اعمال تغییرات» را بزنید.';
-    input.value = '';
-
-  }catch(error){
-    console.error('IMAGE UPLOAD ERROR:', error);
-    if(status) status.textContent = 'خطا در بارگذاری عکس: ' + (error.message || 'خطای نامشخص');
-    alert('بارگذاری عکس انجام نشد: ' + (error.message || 'خطای نامشخص'));
-  }
+function removeItemImage(index,imageIndex){
+  const item=data[index];if(!item)return;const images=getItemImages(item);const removed=images[imageIndex];if(!removed)return;
+  if(!confirm('این عکس از آیتم حذف شود؟'))return;
+  const path=storagePathFromPublicUrl(removed);if(path)pendingImageDeletes.push(path);
+  item.image_urls=images.filter((_,i)=>i!==imageIndex);item.image_url=item.image_urls[0]||'';
+  markChanged();render();
 }
 
 
@@ -4148,7 +4114,10 @@ async function applyChanges(){
                 item.category,
 
               image_url:
-                item.image_url || null
+                item.image_url || null,
+
+              image_urls:
+                getItemImages(item)
 
             })
             .select()
@@ -4197,7 +4166,8 @@ async function applyChanges(){
               item.category ||
 
             (old.image_url || '') !==
-              (item.image_url || '')
+              (item.image_url || '') ||
+            JSON.stringify(getItemImages(old)) !== JSON.stringify(getItemImages(item))
           )
         ){
 
@@ -4219,7 +4189,10 @@ async function applyChanges(){
                   item.category,
 
                 image_url:
-                  item.image_url || null
+                  item.image_url || null,
+
+              image_urls:
+                  getItemImages(item)
 
               })
               .eq(
@@ -4279,6 +4252,14 @@ async function applyChanges(){
     }
 
 
+    /* REMOVE IMAGE FILES AFTER DATABASE SAVE */
+    if(pendingImageDeletes.length){
+      const paths=[...new Set(pendingImageDeletes)];
+      const removed=await supabaseClient.storage.from('menu-images').remove(paths);
+      if(removed.error) console.warn('Some old images could not be removed from storage:',removed.error);
+      pendingImageDeletes=[];
+    }
+
     /* RELOAD */
 
     await loadCategories();
@@ -4299,6 +4280,7 @@ async function applyChanges(){
 
 
     hasChanges = false;
+    pendingImageDeletes = [];
 
 
     status.className =
@@ -4368,6 +4350,7 @@ function cancelChanges(){
 
 
   hasChanges = false;
+  pendingImageDeletes = [];
 
 
   render();
